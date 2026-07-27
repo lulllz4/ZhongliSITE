@@ -541,6 +541,12 @@
     color: #d9a49f;
   }
 
+#page-sealed .card-body {
+  --mx: 50%; --my: 50%;
+  background-image: radial-gradient(circle 180px at var(--mx) var(--my),
+    rgba(196, 150, 60, 0.07), transparent);
+}
+  
   /* большая полупрозрачная печать поверх запечатанной страницы */
   .broken-seal-mark {
     position: absolute; top: 30px; right: 40px;
@@ -923,6 +929,14 @@
   padding: 4px 12px 0 0;
   color: var(--cinnabar);
 }
+
+/* карточки алиасов — про Запад, пусть при наведении «краснеют» */
+.alias-card:hover { border-color: var(--cinnabar); }
+
+/* а привычки, чай, каллиграфия — про дом */
+#page-mind .card:nth-of-type(3) .card-header .zh-title { color: var(--jade); }
+
+  
   
   /* ---------- АДАПТИВ ---------- */
   @media (max-width: 900px) {
@@ -1614,6 +1628,12 @@ suzhouLetter.querySelector('.letter-env').addEventListener('click', function () 
     // первичная анимация шкал, если открыли сразу страницу характера
     animateStats();
 
+document.querySelector('#page-sealed .card-body')?.addEventListener('mousemove', e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  e.currentTarget.style.setProperty('--my', (e.clientY - r.top) + 'px');
+});
+    
 // Ляссе
 const silkRibbon = document.getElementById('silkRibbon');
 silkRibbon.addEventListener('click', function () {
