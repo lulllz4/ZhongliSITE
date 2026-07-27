@@ -49,7 +49,6 @@
   }
   /* затемнение краёв, как у старого свитка */
   .paper-vignette {
-    <div class="ink-mountains"></div>
     position: fixed; inset: 0;
     background: radial-gradient(ellipse at center, transparent 62%, rgba(92,58,28,0.20) 100%);
     pointer-events: none; z-index: 9991;
@@ -569,6 +568,7 @@
   }
   .seal-close:hover { background: var(--ink); color: var(--paper); }
 
+  
   @keyframes shakeWindow {
     0%,100% { transform: translateX(0); }
     25% { transform: translateX(-6px); }
@@ -721,22 +721,6 @@
     opacity: 0.5;
   }
 
-/* ---------- ГОРЫ-ВОДЯНОЙ ЗНАК ---------- */
-  .ink-mountains {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 40vh;
-    background-image: url('img/mountains.jpg'); /* пейзаж тушью */
-    background-size: cover;
-    background-position: center top;
-    opacity: 0.08;                 /* еле заметно, как проступающая тушь */
-    pointer-events: none;
-    z-index: 0;
-    /* мягкое растворение верхнего края */
-    -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
-    mask-image: linear-gradient(to top, black 40%, transparent 100%);
-    filter: sepia(40%);
-  }
   
   /* ---------- АДАПТИВ ---------- */
   @media (max-width: 900px) {
@@ -765,6 +749,96 @@
     .info-label { width: 130px; }
     .broken-seal-mark { width: 76px; height: 76px; font-size: 20px; }
   }
+
+  /* ===== Ляссе ===== */
+.ribbon-wrap {
+  position: fixed;
+  top: 0;
+  right: clamp(20px, 7vw, 100px);
+  z-index: 500;
+  cursor: pointer;
+  transform-origin: top center;
+  animation: ribbonSway 5.5s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes ribbonSway {
+  0%, 100% { transform: rotate(0deg); }
+  30%      { transform: rotate(1.6deg); }
+  70%      { transform: rotate(-1.4deg); }
+}
+
+.ribbon {
+  width: 30px;
+  height: 108px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px,
+      transparent 1px, transparent 3px),
+    linear-gradient(105deg,
+      #7d241b 0%, #a83226 30%, #c4452f 50%, #a83226 70%, #6e1f17 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%);
+  box-shadow: 2px 3px 8px rgba(47, 36, 24, 0.35);
+  transition: height 0.7s cubic-bezier(0.33, 1, 0.4, 1);
+}
+
+/* шов у крепления */
+.ribbon::before {
+  content: "";
+  position: absolute;
+  top: 6px; left: 4px; right: 4px;
+  border-top: 1px dashed rgba(232, 213, 168, 0.45);
+}
+
+.ribbon-text {
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 7px;
+  color: #e8d5a8;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  margin: 26px auto 0;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.25s;
+  user-select: none;
+}
+
+.ribbon-note {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: -4px;
+  white-space: nowrap;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  opacity: 0;
+  transition: opacity 0.5s ease 0.4s;
+  pointer-events: none;
+}
+
+/* --- развёрнутое состояние --- */
+.ribbon-wrap.open {
+  animation: none;
+  transform: rotate(0deg);
+}
+.ribbon-wrap.open .ribbon { height: 330px; }
+.ribbon-wrap.open .ribbon-text,
+.ribbon-wrap.open .ribbon-note { opacity: 1; }
+
+.ribbon-wrap:hover .ribbon {
+  box-shadow: 2px 4px 12px rgba(47, 36, 24, 0.45);
+}
+
+@media (max-width: 640px) {
+  .ribbon-wrap { right: 14px; }
+  .ribbon { width: 24px; height: 84px; }
+  .ribbon-text { font-size: 14px; letter-spacing: 5px; margin-top: 20px; }
+  .ribbon-wrap.open .ribbon { height: 270px; }
+  .ribbon-note { font-size: 11px; }
+}
   
 </style>
 </head>
@@ -779,6 +853,14 @@
 <div class="scroll-edge">
   <div class="edge-text">大清欽命行人司卷宗</div>
   <div class="edge-seal">卷</div>
+</div>
+
+  <!-- Шёлковая закладка-ляссе -->
+<div class="ribbon-wrap" id="silkRibbon" title="書籤">
+  <div class="ribbon">
+    <div class="ribbon-text">八千里路雲和月</div>
+  </div>
+  <div class="ribbon-note">восемь тысяч ли пути — облака и луна</div>
 </div>
 
 <!-- ЭКРАН ЗАГРУЗКИ -->
@@ -1164,6 +1246,12 @@
 
     // первичная анимация шкал, если открыли сразу страницу характера
     animateStats();
+
+// Ляссе
+const silkRibbon = document.getElementById('silkRibbon');
+silkRibbon.addEventListener('click', function () {
+  this.classList.toggle('open');
+});
     
 // === ПАДАЮЩИЕ ЛЕПЕСТКИ СЛИВЫ ===
     const petalGlyphs = ['❀', '✿', '❁'];
