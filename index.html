@@ -54,7 +54,10 @@
     pointer-events: none; z-index: 9991;
   }
 
-
+.paper-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
   
   ::selection { background: var(--cinnabar); color: var(--paper); }
 
@@ -1601,6 +1604,15 @@ silkRibbon.addEventListener('click', function () {
       });
     });
 
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('inked'));
+}, { threshold: 0.1 });
+document.querySelectorAll('.card').forEach(c => observer.observe(c));
+
+    .card { opacity: 0; transform: translateY(12px); filter: blur(2px);
+        transition: all 0.7s ease; }
+.card.inked { opacity: 1; transform: none; filter: none; }
+    
     // затухание внизу прокручиваемой карточки
 document.querySelectorAll('.scroll-card .card-body').forEach(function (body) {
   const fade = body.querySelector('.scroll-fade');
