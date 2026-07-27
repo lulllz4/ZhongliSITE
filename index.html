@@ -866,6 +866,17 @@
   animation: handTrembles 0.5s ease;
 }
   
+.scroll-fade {
+  position: sticky;
+  bottom: -1px;
+  height: 36px;
+  margin-top: -36px;
+  background: linear-gradient(to bottom, transparent, var(--paper));
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.scroll-fade.hidden { opacity: 0; }
+  
   /* ---------- АДАПТИВ ---------- */
   @media (max-width: 900px) {
     .top-grid { grid-template-columns: 1fr; }
@@ -976,6 +987,30 @@
   box-shadow: 2px 4px 12px rgba(47, 36, 24, 0.45);
 }
 
+  /* ===== Карточка с прокруткой ===== */
+.scroll-card.open .card-body {
+  max-height: min(420px, 60vh);   /* видимая часть; правь по вкусу */
+  overflow-y: auto;
+  overscroll-behavior: contain;    /* страница не дёргается, когда доскроллили до конца */
+  -webkit-overflow-scrolling: touch;
+  padding-right: 10px;
+  scrollbar-width: thin;                              /* Firefox */
+  scrollbar-color: var(--cinnabar) var(--paper-dark); /* Firefox */
+}
+
+/* полоса прокрутки под стиль (Chrome/Safari/Edge) */
+.scroll-card.open .card-body::-webkit-scrollbar { width: 5px; }
+.scroll-card.open .card-body::-webkit-scrollbar-track {
+  background: var(--paper-dark);
+}
+.scroll-card.open .card-body::-webkit-scrollbar-thumb {
+  background: var(--cinnabar);
+  border-radius: 3px;
+}
+.scroll-card.open .card-body::-webkit-scrollbar-thumb:hover {
+  background: var(--cinnabar-bright);
+}
+
 @media (max-width: 640px) {
   .ribbon-wrap { right: 14px; }
   .ribbon { width: 24px; height: 84px; }
@@ -983,6 +1018,7 @@
   .ribbon-wrap.open .ribbon { height: 270px; }
   .ribbon-note { font-size: 11px; }
 }
+
   
 </style>
 </head>
@@ -1148,8 +1184,9 @@
 
   <!-- ===== СТРАНИЦА 3: ХАРАКТЕР ===== -->
   <div id="page-mind" class="page">
-<div class="card collapsible">
+<div class="card collapsible open scroll-card">
       <div class="card-header"><span class="zh-title">性情</span><span class="en-title">Нрав и сердце</span></div>
+  <div class="scroll-fade"></div>
       <div class="card-body">
         <p>     По обе стороны континента его считают самым спокойным существом из всех, с кем доводилось иметь дело. В Лондоне это приписывают восточному воспитанию, дома — безупречной выучке. Чжун Ли знает настоящую причину своего покоя и ни разу её не назвал, потому что причина эта проста и неутешительна: он перестал спорить с жизнью. Не помирился, не смирился, не достиг того просветления, о котором так красиво пишут в трактатах его же земли, — просто однажды заметил, что триста лет ведёт спор с глухим собеседником. Наступившую тишину окружающие приняли за мудрость, он предпочел не спорить. Мудрость — удобная вывеска, под ней можно хранить что угодно, и никто не заглянет.</p>
 <p>     Смотреть было его работой всю жизнь: смотреть, запоминать, передавать. Он делал её добросовестно двести тридцать лет, и выводы накопились сами собой, без всякого приглашения.</p>
@@ -1563,6 +1600,16 @@ silkRibbon.addEventListener('click', function () {
         }
       });
     });
+
+    // затухание внизу прокручиваемой карточки
+document.querySelectorAll('.scroll-card .card-body').forEach(function (body) {
+  const fade = body.querySelector('.scroll-fade');
+  if (!fade) return;
+  body.addEventListener('scroll', function () {
+    const atBottom = body.scrollTop + body.clientHeight >= body.scrollHeight - 8;
+    fade.classList.toggle('hidden', atBottom);
+  });
+});
     
   });
 </script>
