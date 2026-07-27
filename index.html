@@ -6,37 +6,37 @@
 <title>沈聿 · Шэнь Юй · Анкета · 1852</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Ma+Shan+Zheng&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Ma+Shan+Zheng&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #e6dabf;
-    --paper-dark: #d9caa8;
-    --ink: #2a241c;
-    --ink-soft: #4a4136;
-    --cinnabar: #9e2b25;
-    --cinnabar-bright: #b83a30;
-    --jade: #4a6b5d;
-    --gold: #8f7434;
-    --line: rgba(42, 36, 28, 0.25);
-  }
+    /* Новая тёплая палитра — слоновая кость, киноварь, золото */
+    --paper: #f5ebd7;
+    --paper-dark: #eaddc0;
+    --ink: #2f2418;
+    --ink-soft: #5c4a36;
+    --cinnabar: #a83226;
+    --cinnabar-bright: #c4452f;
+    --jade: #5d7d6c;
+    --gold: #a07a3c;
+    --line: rgba(47, 36, 24, 0.22);
+}
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'EB Garamond', 'Noto Serif TC', serif;
-    font-size: 16px;
-    line-height: 1.7;
+    font-family: 'Lora', 'Noto Serif TC', serif;
+    font-size: 17px;
+    line-height: 1.75;
     min-height: 100vh;
     padding: 0 20px 60px;
     /* пятна старости на бумаге */
-    background-image:
-      radial-gradient(ellipse at 15% 10%, rgba(143,116,52,0.10) 0%, transparent 45%),
-      radial-gradient(ellipse at 85% 30%, rgba(158,43,37,0.05) 0%, transparent 40%),
-      radial-gradient(ellipse at 70% 90%, rgba(74,65,54,0.10) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 60%, rgba(143,116,52,0.07) 0%, transparent 35%);
-    background-attachment: fixed;
+   background-image:
+      radial-gradient(ellipse at 12% 8%, rgba(196,69,47,0.07) 0%, transparent 42%),
+      radial-gradient(ellipse at 88% 25%, rgba(160,122,60,0.09) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 92%, rgba(93,125,108,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 25% 65%, rgba(196,69,47,0.04) 0%, transparent 40%);
   }
 
   /* зерно бумаги */
@@ -50,7 +50,7 @@
   /* затемнение краёв, как у старого свитка */
   .paper-vignette {
     position: fixed; inset: 0;
-    background: radial-gradient(ellipse at center, transparent 60%, rgba(58,45,25,0.22) 100%);
+    background: radial-gradient(ellipse at center, transparent 62%, rgba(92,58,28,0.20) 100%);
     pointer-events: none; z-index: 9991;
   }
 
@@ -172,7 +172,7 @@
   }
   .nav-tab .tab-sub {
     display: block;
-    font-family: 'EB Garamond', serif;
+    font-family: 'Lora', serif;
     font-size: 9px; letter-spacing: 2px; font-style: italic;
     color: var(--ink-soft); margin-top: 6px;
   }
@@ -235,7 +235,7 @@
     letter-spacing: 4px; font-size: 14px; color: var(--ink-soft);
     display: block;
   }
-  .info-value { flex: 1; min-width: 220px; }
+   .info-value { flex: 1; min-width: 220px; font-size: 15.5px; }
 
   /* ---------- ПОРТРЕТ ---------- */
   .top-grid {
@@ -307,7 +307,7 @@
     max-height: 420px;
   }
   .v-line.translation {
-    font-family: 'EB Garamond', serif;
+    font-family: 'Lora', serif;
     writing-mode: horizontal-tb;
     font-size: 13px; font-style: italic; letter-spacing: 1px;
     color: var(--ink-soft);
@@ -415,7 +415,7 @@
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--gold); margin-bottom: 4px;
   }
-  .relation-desc { font-size: 14px; color: var(--ink-soft); }
+.relation-desc { font-size: 15px; color: var(--ink-soft); }
 
   /* ---------- ПРЕДМЕТЫ ---------- */
   .artifact-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -545,7 +545,7 @@
     background: transparent;
     border: none; border-bottom: 2px solid var(--ink);
     text-align: center;
-    font-family: 'EB Garamond', serif;
+    font-family: 'Lora', serif;
     font-size: 22px; letter-spacing: 8px;
     color: var(--ink);
     padding: 6px;
@@ -560,7 +560,7 @@
     margin-top: 16px;
     background: none; border: 1px solid var(--ink-soft);
     padding: 6px 20px;
-    font-family: 'EB Garamond', serif; font-style: italic;
+    font-family: 'Lora', serif; font-style: italic;
     font-size: 13px; color: var(--ink-soft);
     cursor: pointer; transition: all 0.2s;
   }
@@ -610,7 +610,7 @@
   .loading-skip {
     background: none; border: 1px solid rgba(230,218,191,0.4);
     color: rgba(230,218,191,0.6);
-    font-family: 'EB Garamond', serif; font-style: italic;
+    font-family: 'Lora', serif; font-style: italic;
     padding: 5px 18px; font-size: 12px; letter-spacing: 2px;
     cursor: pointer; transition: all 0.2s;
   }
@@ -634,7 +634,85 @@
     color: var(--ink-soft);
   }
   .footer .zh { font-family: 'Noto Serif TC', serif; font-style: normal; }
+  
+/* ---------- ЛЕПЕСТКИ СЛИВЫ ---------- */
+  .petal {
+    position: fixed;
+    top: -30px;
+    color: rgba(196, 69, 47, 0.35);
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 5;
+    animation: petalFall linear forwards;
+  }
+  @keyframes petalFall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    8%   { opacity: 1; }
+    90%  { opacity: 0.7; }
+    100% { transform: translateY(105vh) translateX(var(--drift)) rotate(var(--spin)); opacity: 0; }
+  }
 
+  .card { transition: box-shadow 0.3s ease, transform 0.3s ease; }
+  .card:hover {
+    box-shadow: 3px 6px 14px rgba(47,36,24,0.18);
+    transform: translateY(-2px);
+  }
+  
+  /* ---------- ВЕТКА СЛИВЫ В ШАПКЕ ---------- */
+  .plum-branch {
+    position: absolute;
+    right: 110px; top: 10px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    color: rgba(168, 50, 38, 0.5);
+    letter-spacing: 10px;
+    user-select: none;
+    pointer-events: none;
+  }
+  .plum-branch::before {
+    content: "";
+    position: absolute;
+    left: -60px; top: 12px;
+    width: 150px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(92,58,28,0.4) 30%, rgba(92,58,28,0.5));
+    transform: rotate(-8deg);
+  }
+
+/* ---------- СКЛАДНЫЕ КАРТОЧКИ ---------- */
+  .collapsible .card-header {
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.25s ease;
+  }
+  .collapsible .card-header:hover { background: rgba(168,50,38,0.06); }
+  .collapsible .card-header::after {
+    content: "展";                 /* «развернуть» */
+    margin-left: auto;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px;
+    color: var(--cinnabar);
+    border: 1px solid var(--cinnabar);
+    padding: 1px 7px;
+    transition: transform 0.3s ease;
+  }
+  .collapsible.open .card-header::after {
+    content: "收";                 /* «свернуть» */
+  }
+  .collapsible .card-body {
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0; padding-bottom: 0;
+    opacity: 0;
+    transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.4s ease, padding 0.4s ease;
+  }
+  .collapsible.open .card-body {
+    max-height: 6000px;            /* с запасом под длинные тексты */
+    opacity: 1;
+    padding: 20px;
+  }
+
+  
   /* ---------- АДАПТИВ ---------- */
   @media (max-width: 900px) {
     .top-grid { grid-template-columns: 1fr; }
@@ -666,6 +744,8 @@
 </head>
 <body>
 
+
+  
 <div class="paper-grain"></div>
 <div class="paper-vignette"></div>
 
@@ -702,6 +782,7 @@
       <div class="dossier-year">咸豐二年 · год 1852-й</div>
     </div>
     <div class="seal" id="headerSeal" title="печать">沈聿之印</div>
+    <div class="plum-branch">梅 ✿ ❀ ✿</div>
   </div>
 
   <div class="status-line">
@@ -765,7 +846,7 @@
 
   <!-- ===== СТРАНИЦА 2: БИОГРАФИЯ ===== -->
   <div id="page-bio" class="page">
-    <div class="card">
+<div class="card collapsible open">
       <div class="card-header"><span class="zh-title">身世</span><span class="en-title">Жизнеописание</span></div>
       <div class="card-body">
         <p>Родился в Сучжоу в семье каллиграфа. Готовился к государственным экзаменам, служил младшим письмоводителем. В 1578 году, сопровождая торговый караван в Гуанчжоу, встретил того, кого принял за учёного-отшельника. Тот искал не ученика — наследника архива, который нужно вести вечно.</p>
@@ -818,7 +899,7 @@
 
   <!-- ===== СТРАНИЦА 3: ХАРАКТЕР ===== -->
   <div id="page-mind" class="page">
-    <div class="card">
+ <div class="card collapsible open">
       <div class="card-header"><span class="zh-title">性情</span><span class="en-title">Нрав и сердце</span></div>
       <div class="card-body">
         <p>Шэнь Юй вежлив той вежливостью, которая старше всех его собеседников. Он никогда не повышает голос — за триста лет он понял, что тише говорит тот, кого всё равно будут слушать. На переговорах он безупречен: терпелив, точен, находит компромисс там, где старейшины Европы видят только повод для войны кланов.</p>
@@ -1011,7 +1092,7 @@
 
         <p>«Я боюсь не солнца и не серебра. Я боюсь, что когда я вернусь, Сучжоу не узнает меня — и это будет справедливо, потому что я сам узнаю́ себя всё реже. <span class="redacted-ink">Если однажды я откликнусь на имя Джулиан прежде, чем на имя Юй, — пусть рассвет застанет меня в дороге.</span>»</p>
 
-        <p style="text-align:right; font-family:'Noto Serif TC',serif; margin-top:24px;">崇禎二百二十五年 · 沈聿 手書<br><span style="font-size:12px; font-style:italic; font-family:'EB Garamond',serif; color:rgba(207,192,160,0.6);">«год 225-й Чунчжэня» — по календарю династии, павшей двести восемь лет назад</span></p>
+        <p style="text-align:right; font-family:'Noto Serif TC',serif; margin-top:24px;">崇禎二百二十五年 · 沈聿 手書<br><span style="font-size:12px; font-style:italic; font-family:'Lora',serif; color:rgba(207,192,160,0.6);">«год 225-й Чунчжэня» — по календарю династии, павшей двести восемь лет назад</span></p>
       </div>
     </div>
   </div>
@@ -1067,7 +1148,7 @@
       const page = document.getElementById('page-' + pageId);
       if (page) page.classList.add('active-page');
       // перезапуск анимации шкал на странице характера
-      if (pageId === 'mind') animateStats();
+  if (pageId === 'mind') setTimeout(animateStats, 100);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1182,7 +1263,7 @@
           background: rgba(36,31,25,0.95); color: #cfc0a0;
           border: 1px solid #9e2b25;
           padding: 18px 34px;
-          font-family: 'EB Garamond', serif; font-style: italic;
+          font-family: 'Lora', serif; font-style: italic;
           font-size: 16px; letter-spacing: 2px;
           z-index: 10000; text-align: center;
           pointer-events: none;
@@ -1195,6 +1276,39 @@
 
     // первичная анимация шкал, если открыли сразу страницу характера
     animateStats();
+    
+// === ПАДАЮЩИЕ ЛЕПЕСТКИ СЛИВЫ ===
+    const petalGlyphs = ['❀', '✿', '❁'];
+    function spawnPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.textContent = petalGlyphs[Math.floor(Math.random() * petalGlyphs.length)];
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.fontSize = (10 + Math.random() * 10) + 'px';
+      petal.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+      petal.style.setProperty('--spin', (Math.random() * 360 - 180) + 'deg');
+      const duration = 9 + Math.random() * 8;
+      petal.style.animationDuration = duration + 's';
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), duration * 1000);
+    }
+    // редкие, ненавязчивые: один лепесток раз в 2.5–5 секунд
+    setInterval(() => { if (Math.random() > 0.4) spawnPetal(); }, 2500);
+    // пара лепестков сразу при загрузке
+    spawnPetal(); setTimeout(spawnPetal, 1200);
+
+    // === СКЛАДНЫЕ КАРТОЧКИ ===
+    document.querySelectorAll('.collapsible .card-header').forEach(header => {
+      header.addEventListener('click', function() {
+        const card = this.closest('.collapsible');
+        card.classList.toggle('open');
+        // если раскрыли карточку со шкалами — перезапустить их анимацию
+        if (card.classList.contains('open') && card.querySelector('.stat-fill')) {
+          setTimeout(animateStats, 300);
+        }
+      });
+    });
+    
   });
 </script>
 </body>
