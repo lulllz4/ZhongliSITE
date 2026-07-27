@@ -1603,15 +1603,6 @@ silkRibbon.addEventListener('click', function () {
         }
       });
     });
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => e.isIntersecting && e.target.classList.add('inked'));
-}, { threshold: 0.1 });
-document.querySelectorAll('.card').forEach(c => observer.observe(c));
-
-    .card { opacity: 0; transform: translateY(12px); filter: blur(2px);
-        transition: all 0.7s ease; }
-.card.inked { opacity: 1; transform: none; filter: none; }
     
     // затухание внизу прокручиваемой карточки
 document.querySelectorAll('.scroll-card .card-body').forEach(function (body) {
