@@ -49,11 +49,14 @@
   }
   /* затемнение краёв, как у старого свитка */
   .paper-vignette {
+    <div class="ink-mountains"></div>
     position: fixed; inset: 0;
     background: radial-gradient(ellipse at center, transparent 62%, rgba(92,58,28,0.20) 100%);
     pointer-events: none; z-index: 9991;
   }
 
+
+  
   ::selection { background: var(--cinnabar); color: var(--paper); }
 
   /* ---------- ЛЕВАЯ КРОМКА СВИТКА ---------- */
@@ -712,6 +715,28 @@
     padding: 20px;
   }
 
+.brush-divider {
+    display: flex; justify-content: center;
+    margin: 36px 0;
+    opacity: 0.5;
+  }
+
+/* ---------- ГОРЫ-ВОДЯНОЙ ЗНАК ---------- */
+  .ink-mountains {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 40vh;
+    background-image: url('img/mountains.jpg'); /* пейзаж тушью */
+    background-size: cover;
+    background-position: center top;
+    opacity: 0.08;                 /* еле заметно, как проступающая тушь */
+    pointer-events: none;
+    z-index: 0;
+    /* мягкое растворение верхнего края */
+    -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
+    mask-image: linear-gradient(to top, black 40%, transparent 100%);
+    filter: sepia(40%);
+  }
   
   /* ---------- АДАПТИВ ---------- */
   @media (max-width: 900px) {
@@ -850,6 +875,15 @@
         <p>Родился в Сучжоу в семье каллиграфа. Готовился к государственным экзаменам, служил младшим письмоводителем. В 1578 году, сопровождая торговый караван в Гуанчжоу, встретил того, кого принял за учёного-отшельника. Тот искал не ученика — наследника архива, который нужно вести вечно.</p>
         <p>Пережил падение Мин в 1644-м. Это — главная рана: страна, которой он присягал, умерла, а он — нет. Цин он служит как чиновник служит должности: без любви, по необходимости. Когда старейшины ночного Китая поняли, что западные вампиры приходят вместе с западными пушками, они отправили на переговоры того, кто уже умел ждать столетиями.</p>
       </div>
+   <div class="brush-divider">
+      <svg width="240" height="20" viewBox="0 0 240 20">
+        <path d="M5 12 Q 40 4, 80 10 T 150 9 Q 190 6, 235 11"
+              stroke="#2f2418" stroke-width="3" fill="none"
+              stroke-linecap="round" opacity="0.7"/>
+        <path d="M60 13 Q 100 8, 140 12" stroke="#a83226" stroke-width="1.5"
+              fill="none" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+    </div>
     </div>
 
 <div class="card collapsible">
