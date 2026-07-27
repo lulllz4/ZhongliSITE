@@ -721,6 +721,150 @@
     opacity: 0.5;
   }
 
+.letters-intro {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--line);
+  padding-left: 16px;
+  margin: 0 0 24px;
+}
+
+.letters-outro {
+  text-align: center;
+  font-family: 'Noto Serif TC', 'Lora', serif;
+  font-size: 12.5px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+  opacity: 0.75;
+  margin-top: 28px;
+}
+
+  /* ===== Письма ===== */
+.letters {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.letter { position: relative; }
+
+/* конверт */
+.letter-env {
+  position: relative;
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.35), transparent 60%),
+    var(--paper-dark);
+  border: 1px solid var(--line);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+/* клапан конверта */
+.letter-env::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(47,36,24,0.07), transparent);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  pointer-events: none;
+}
+.letter-env:hover {
+  box-shadow: 2px 4px 12px rgba(47,36,24,0.18);
+  transform: translateY(-2px);
+}
+
+.env-addr {
+  font-family: 'Lora', serif;
+  font-size: 15.5px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.env-from {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+/* лист письма */
+.letter-paper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s cubic-bezier(0.33, 1, 0.4, 1);
+  background: var(--paper);
+  border-left: 2px solid var(--cinnabar);
+  margin: 0 10px;
+}
+.letter.open .letter-paper { max-height: 900px; }
+.letter.open .letter-env { box-shadow: none; transform: none; }
+
+.letter-text-en, .letter-text-cn {
+  padding: 18px 20px 12px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.letter-text-en { font-family: 'Lora', serif; font-style: italic; }
+.letter-text-cn { font-family: 'Noto Serif TC', serif; }
+
+.letter-trans {
+  padding: 0 20px 18px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  border-top: 1px dashed var(--line);
+  padding-top: 12px;
+  margin: 0 20px 18px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* --- нераспечатанное --- */
+.sealed-letter .letter-env { cursor: pointer; }
+
+.env-wax {
+  position: absolute;
+  top: 50%; right: 22px;
+  transform: translateY(-50%) rotate(-6deg);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--cinnabar-bright), #6e1f17 85%);
+  color: #e8d5a8;
+  font-family: 'Ma Shan Zheng', 'Noto Serif TC', serif;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(47,36,24,0.35);
+}
+
+.letter-refuse {
+  text-align: center;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  padding: 10px 0 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.letter-refuse.show { opacity: 1; }
+
+/* дрожь конверта при попытке открыть */
+@keyframes handTrembles {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-2px) rotate(-0.4deg); }
+  50% { transform: translateX(2px) rotate(0.3deg); }
+  75% { transform: translateX(-1px) rotate(-0.2deg); }
+}
+.sealed-letter.tremble .letter-env {
+  animation: handTrembles 0.5s ease;
+}
   
   /* ---------- АДАПТИВ ---------- */
   @media (max-width: 900px) {
@@ -904,6 +1048,7 @@
     <div class="nav-tab active" data-page="main">名帖<span class="tab-sub">визитка</span></div>
     <div class="nav-tab" data-page="bio">身世<span class="tab-sub">биография</span></div>
     <div class="nav-tab" data-page="mind">性情<span class="tab-sub">характер</span></div>
+    <div class="nav-tab" data-page="letters">書信<span class="tab-sub">письма</span></div>
     <div class="nav-tab sealed-tab" data-page="sealed">封<span class="tab-sub">запечатано</span></div>
   </div>
 
@@ -923,7 +1068,7 @@
         <div class="card">
           <div class="card-header"><span class="zh-title">名帖</span><span class="en-title">ВИЗИТНАЯ КАРТОЧКА</span></div>
           <div class="card-body">
-            <div class="info-row"><div class="info-label">Имя <span class="zh">姓名</span></div><div class="info-value">Шэнь Юй (沈聿). Юй — «кисть для письма»; имя, данное отцом-каллиграфом.</div></div>
+            <div class="info-row"><div class="info-label">Имя <span class="zh">姓名</span></div><div class="info-value">Чжун Ли (鍾離) — «колокол разлуки»; имя, данное отцом.</div></div>
             <div class="info-row"><div class="info-label">Второе имя <span class="zh">字</span></div><div class="info-value">Цзиньхэ (静河) — «тихая река»</div></div>
             <div class="info-row"><div class="info-label">Рождение <span class="zh">生辰</span></div><div class="info-value">1547 год, Сучжоу, империя Мин. Обращён в 1578-м.</div></div>
             <div class="info-row"><div class="info-label">Занятие <span class="zh">職</span></div><div class="info-value">Посланник Срединного двора ночи. Ведёт переговоры со старейшинами Европы и Нового Света от лица китайских кланов.</div></div>
@@ -1042,7 +1187,32 @@
     </div>
   </div>
 
+<div class="page" id="page-letters">
 
+  <!-- 3 страница -->
+
+  <div class="letters-intro">
+    В архиве 守卷者 значится: писем полученных — 137, писем отправленных — 4.
+    К свитку приложены три.
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title-cn">書信</span>
+      <span class="card-title">Приложенные письма</span>
+    </div>
+    <div class="card-body">
+
+      <!-- СЮДА вставь блок <div class="letters"> ... </div>
+           с тремя письмами из моего прошлого сообщения, без изменений -->
+
+    </div>
+  </div>
+
+  <div class="letters-outro">餘函不付 · остальные сто тридцать четыре выдаче не подлежат</div>
+
+</div>
+  
   <!-- ===== СТРАНИЦА 7: ЗАПЕЧАТАНО ===== -->
   <div id="page-sealed" class="page sealed-page">
     <div class="card">
@@ -1220,6 +1390,39 @@
       });
     }
 
+// Письма
+document.querySelectorAll('[data-letter] .letter-env').forEach(function (env) {
+  env.addEventListener('click', function () {
+    this.parentElement.classList.toggle('open');
+  });
+});
+
+// Нераспечатанное письмо
+const suzhouLetter = document.getElementById('suzhouLetter');
+const suzhouRefuse = document.getElementById('suzhouRefuse');
+let suzhouTries = 0;
+
+suzhouLetter.querySelector('.letter-env').addEventListener('click', function () {
+  suzhouTries++;
+  suzhouLetter.classList.remove('tremble');
+  void suzhouLetter.offsetWidth; /* перезапуск анимации */
+  suzhouLetter.classList.add('tremble');
+
+  const phrases = [
+    'рука не поднимается',
+    'не сегодня',
+    'двести шестьдесят девять лет — не сегодня',
+    '……'
+  ];
+  suzhouRefuse.textContent = phrases[Math.min(suzhouTries - 1, phrases.length - 1)];
+  suzhouRefuse.classList.add('show');
+
+  clearTimeout(suzhouRefuse._t);
+  suzhouRefuse._t = setTimeout(function () {
+    suzhouRefuse.classList.remove('show');
+  }, 3000);
+});
+    
     // === ГОД ПО ДВУМ КАЛЕНДАРЯМ В ПОДВАЛЕ (пасхалка) ===
     // при двойном клике на подвал показывает возраст персонажа с точностью до дня
     const footer = document.querySelector('.footer');
