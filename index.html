@@ -1,1 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沈聿 · Шэнь Юй · Анкета · 1852</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Ma+Shan+Zheng&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #e6dabf;
+    --paper-dark: #d9caa8;
+    --ink: #2a241c;
+    --ink-soft: #4a4136;
+    --cinnabar: #9e2b25;
+    --cinnabar-bright: #b83a30;
+    --jade: #4a6b5d;
+    --gold: #8f7434;
+    --line: rgba(42, 36, 28, 0.25);
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', 'Noto Serif TC', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 0 20px 60px;
+    /* пятна старости на бумаге */
+    background-image:
+      radial-gradient(ellipse at 15% 10%, rgba(143,116,52,0.10) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 30%, rgba(158,43,37,0.05) 0%, transparent 40%),
+      radial-gradient(ellipse at 70% 90%, rgba(74,65,54,0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 60%, rgba(143,116,52,0.07) 0%, transparent 35%);
+    background-attachment: fixed;
+  }
+
+  /* зерно бумаги */
+  .paper-grain {
+    position: fixed; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, rgba(42,36,28,0.02) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, rgba(42,36,28,0.02) 0 1px, transparent 1px 4px);
+    pointer-events: none; z-index: 9990;
+  }
+  /* затемнение краёв, как у старого свитка */
+  .paper-vignette {
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(58,45,25,0.22) 100%);
+    pointer-events: none; z-index: 9991;
+  }
+
+  ::selection { background: var(--cinnabar); color: var(--paper); }
+
+  /* ---------- ЛЕВАЯ КРОМКА СВИТКА ---------- */
+  .scroll-edge {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 44px;
+    background: linear-gradient(90deg, #3a2d1f 0%, #5a4632 55%, #3a2d1f 100%);
+    box-shadow: 3px 0 12px rgba(42,36,28,0.4);
+    z-index: 1000;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 24px 0;
+  }
+  .scroll-edge .edge-text {
+    writing-mode: vertical-rl;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px; letter-spacing: 10px;
+    color: #cbb27e; opacity: 0.85;
+  }
+  .scroll-edge .edge-seal {
+    margin-top: auto;
+    width: 26px; height: 26px;
+    border: 1px solid var(--cinnabar-bright);
+    color: var(--cinnabar-bright);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 14px; display: flex; align-items: center; justify-content: center;
+    opacity: 0.9;
+  }
+
+  .wrapper {
+    max-width: 1200px; margin: 0 auto;
+    padding-left: 56px;
+    position: relative; z-index: 1;
+  }
+
+  /* ---------- ШАПКА ---------- */
+  .doc-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+    padding: 40px 8px 24px;
+    border-bottom: 3px double var(--ink);
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .header-name-block { display: flex; align-items: flex-end; gap: 20px; }
+  .big-name {
+    font-family: 'Ma Shan Zheng', 'Noto Serif TC', serif;
+    font-size: 92px; line-height: 1;
+    color: var(--ink);
+    text-shadow: 2px 2px 0 rgba(143,116,52,0.25);
+  }
+  .name-latin {
+    padding-bottom: 10px;
+  }
+  .name-latin .translit {
+    font-size: 26px; font-style: italic; letter-spacing: 1px;
+  }
+  .name-latin .western-note {
+    font-size: 13px; font-style: italic; color: var(--ink-soft);
+    border-top: 1px solid var(--line); margin-top: 4px; padding-top: 4px;
+  }
+  .header-right { text-align: right; }
+  .header-right .dossier-line {
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .header-right .dossier-year {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px; color: var(--cinnabar); margin-top: 4px;
+  }
+
+  /* большая красная печать в шапке */
+  .seal {
+    width: 74px; height: 74px;
+    border: 3px solid var(--cinnabar);
+    color: var(--cinnabar);
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900; font-size: 26px; line-height: 1.15;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    transform: rotate(-4deg);
+    box-shadow: inset 0 0 8px rgba(158,43,37,0.35);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease;
+  }
+  .seal:hover { transform: rotate(-4deg) scale(1.06); }
+
+  /* строка с датой и статусом под шапкой */
+  .status-line {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    font-size: 12px; letter-spacing: 2px; color: var(--ink-soft);
+    padding: 8px; border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+  .status-line .zh { font-family: 'Noto Serif TC', serif; font-style: normal; }
+
+  /* ---------- НАВИГАЦИЯ: БИРКИ СВИТКОВ СПРАВА ---------- */
+  .side-nav {
+    position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 10px; z-index: 100;
+  }
+  .nav-tab {
+    writing-mode: vertical-rl;
+    background: var(--paper-dark);
+    border: 1px solid var(--ink-soft);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    padding: 14px 6px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px; letter-spacing: 6px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: -2px 2px 5px rgba(42,36,28,0.25);
+    transform: translateX(6px);
+  }
+  .nav-tab .tab-sub {
+    display: block;
+    font-family: 'EB Garamond', serif;
+    font-size: 9px; letter-spacing: 2px; font-style: italic;
+    color: var(--ink-soft); margin-top: 6px;
+  }
+  .nav-tab:hover { transform: translateX(0); background: var(--paper); }
+  .nav-tab.active {
+    background: var(--cinnabar);
+    color: var(--paper);
+    border-color: var(--cinnabar);
+    transform: translateX(0);
+  }
+  .nav-tab.active .tab-sub { color: rgba(230,218,191,0.75); }
+  .nav-tab.sealed-tab { border-style: dashed; color: var(--cinnabar); }
+  .nav-tab.sealed-tab.active { color: var(--paper); }
+
+  /* ---------- КАРТОЧКИ ---------- */
+  .card {
+    background: rgba(230,218,191,0.6);
+    border: 1px solid var(--line);
+    margin-bottom: 28px;
+    position: relative;
+    box-shadow: 2px 3px 0 rgba(42,36,28,0.12);
+  }
+  /* уголки в китайском стиле */
+  .card::before, .card::after {
+    content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+  }
+  .card::before { top: -1px; left: -1px; border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+  .card::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+
+  .card-header {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 14px 20px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .card-header .zh-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900; font-size: 22px; color: var(--cinnabar);
+  }
+  .card-header .en-title {
+    font-size: 12px; font-style: italic; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .card-body { padding: 20px; }
+
+  /* строки досье */
+  .info-row {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-label {
+    width: 170px; flex-shrink: 0;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+    padding-top: 3px;
+  }
+  .info-label .zh {
+    font-family: 'Noto Serif TC', serif; text-transform: none;
+    letter-spacing: 4px; font-size: 14px; color: var(--ink-soft);
+    display: block;
+  }
+  .info-value { flex: 1; min-width: 220px; }
+
+  /* ---------- ПОРТРЕТ ---------- */
+  .top-grid {
+    display: grid; grid-template-columns: 300px 1fr; gap: 28px;
+    margin-bottom: 28px;
+  }
+  .portrait-frame {
+    position: relative;
+    border: 1px solid var(--ink-soft);
+    padding: 12px;
+    background: var(--paper-dark);
+    box-shadow: 3px 4px 0 rgba(42,36,28,0.18);
+  }
+  .portrait-inner {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4;
+    border: 1px solid var(--line);
+    background: #cfc0a0;
+  }
+  .portrait-inner img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: sepia(35%) contrast(0.95) brightness(0.97);
+  }
+  /* если фото нет — заглушка с иероглифом */
+  .portrait-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Ma Shan Zheng', serif;
+    font-size: 110px; color: rgba(42,36,28,0.2);
+  }
+  /* вертикальная подпись рядом с портретом */
+  .portrait-caption {
+    position: absolute; top: 18px; right: -14px;
+    writing-mode: vertical-rl;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px; letter-spacing: 6px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 10px 4px;
+    box-shadow: 2px 2px 4px rgba(42,36,28,0.2);
+  }
+  /* малая печать на портрете */
+  .portrait-seal {
+    position: absolute; bottom: 20px; left: 20px;
+    width: 42px; height: 42px;
+    border: 2px solid var(--cinnabar-bright);
+    color: var(--cinnabar-bright);
+    font-family: 'Noto Serif TC', serif; font-weight: 900;
+    font-size: 15px; line-height: 1.1;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    transform: rotate(6deg);
+    background: rgba(230,218,191,0.35);
+    z-index: 3;
+  }
+
+  /* ---------- ВЕРТИКАЛЬНАЯ ЦИТАТА ---------- */
+  .vertical-quote-block {
+    display: flex; justify-content: center; gap: 34px;
+    padding: 44px 20px;
+    margin-bottom: 28px;
+  }
+  .v-line {
+    writing-mode: vertical-rl;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 24px; letter-spacing: 14px;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    padding-right: 18px;
+    max-height: 420px;
+  }
+  .v-line.translation {
+    font-family: 'EB Garamond', serif;
+    writing-mode: horizontal-tb;
+    font-size: 13px; font-style: italic; letter-spacing: 1px;
+    color: var(--ink-soft);
+    border-right: none; border-left: 2px solid var(--cinnabar);
+    padding: 0 0 0 14px;
+    max-width: 220px;
+    align-self: center;
+  }
+
+  /* ---------- ШКАЛЫ (черты характера) ---------- */
+  .stat-item { margin-bottom: 18px; }
+  .stat-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .stat-name { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft); }
+  .stat-name .zh { font-family: 'Noto Serif TC', serif; font-size: 14px; margin-right: 8px; color: var(--ink); }
+  .stat-value { font-family: 'Noto Serif TC', serif; font-size: 13px; color: var(--cinnabar); }
+  .stat-bar {
+    height: 8px;
+    background: rgba(42,36,28,0.1);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .stat-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cinnabar) 0%, var(--cinnabar-bright) 100%);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* кисточка на конце шкалы */
+  .stat-fill::after {
+    content: ""; position: absolute; right: -1px; top: -3px;
+    width: 3px; height: 12px; background: var(--cinnabar);
+  }
+
+  /* ---------- ХРОНОЛОГИЯ ---------- */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: repeating-linear-gradient(180deg, var(--ink-soft) 0 8px, transparent 8px 14px);
+    opacity: 0.5;
+  }
+  .timeline-item { position: relative; padding: 0 0 22px 8px; }
+  .timeline-item::before {
+    content: ""; position: absolute; left: -22px; top: 8px;
+    width: 8px; height: 8px;
+    background: var(--cinnabar);
+    transform: rotate(45deg);
+  }
+  .timeline-item .tl-year {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px; color: var(--cinnabar); letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  .timeline-item .tl-year .era { font-size: 11px; color: var(--gold); font-style: italic; margin-left: 8px; letter-spacing: 1px; }
+  .timeline-item .tl-title { font-weight: 600; font-size: 16px; }
+  .timeline-item .tl-desc { font-size: 14px; color: var(--ink-soft); }
+
+/* ---------- ПСЕВДОНИМЫ / «ИНОСТРАНЩИНА» ---------- */
+  .alias-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .alias-card {
+    border: 1px solid var(--line);
+    padding: 14px 16px;
+    background: rgba(217,202,168,0.4);
+    position: relative;
+    transition: all 0.25s ease;
+  }
+  .alias-card:hover { background: rgba(217,202,168,0.8); transform: translateY(-2px); }
+  .alias-city {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .alias-name {
+    font-size: 19px; font-style: italic; margin: 4px 0 2px;
+  }
+  .alias-note { font-size: 13px; color: var(--ink-soft); }
+  /* зачёркнутое красным — «это не моё имя» */
+  .alias-name::after {
+    content: ""; position: absolute; left: 12px; right: 12px; top: 38px;
+    height: 1px; background: var(--cinnabar);
+    opacity: 0; transition: opacity 0.25s ease;
+  }
+  .alias-card:hover .alias-name::after { opacity: 0.6; }
+
+  /* ---------- СВЯЗИ ---------- */
+  .relation-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .relation-item:last-child { border-bottom: none; }
+  .relation-glyph {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 28px; color: var(--cinnabar);
+    width: 44px; height: 44px; flex-shrink: 0;
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(230,218,191,0.5);
+  }
+  .relation-info { flex: 1; }
+  .relation-name { font-weight: 600; font-size: 16px; }
+  .relation-status {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px;
+  }
+  .relation-desc { font-size: 14px; color: var(--ink-soft); }
+
+  /* ---------- ПРЕДМЕТЫ ---------- */
+  .artifact-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .artifact {
+    border: 1px solid var(--line);
+    padding: 16px;
+    background: rgba(217,202,168,0.35);
+  }
+  .artifact-name { font-weight: 600; }
+  .artifact-name .zh { font-family: 'Noto Serif TC', serif; color: var(--cinnabar); margin-right: 8px; }
+  .artifact-desc { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+
+  /* ---------- ВАМПИРСКОЕ: ночная карточка ---------- */
+  .night-card {
+    background: #241f19;
+    color: #cfc0a0;
+    border: 1px solid #171310;
+  }
+  .night-card::before { border-color: var(--gold); }
+  .night-card::after { border-color: var(--gold); }
+  .night-card .card-header { border-bottom-color: rgba(207,192,160,0.2); }
+  .night-card .card-header .zh-title { color: var(--cinnabar-bright); }
+  .night-card .card-header .en-title { color: rgba(207,192,160,0.6); }
+  .night-card .info-label { color: var(--gold); }
+  .night-card .info-label .zh { color: rgba(207,192,160,0.7); }
+  .night-card .info-row { border-bottom-color: rgba(207,192,160,0.15); }
+
+  .weakness-list { list-style: none; }
+  .weakness-list li {
+    padding: 8px 0 8px 26px;
+    position: relative;
+    border-bottom: 1px dotted rgba(207,192,160,0.2);
+  }
+  .weakness-list li:last-child { border-bottom: none; }
+  .weakness-list li::before {
+    content: "血"; /* кровь */
+    position: absolute; left: 0; top: 8px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 13px; color: var(--cinnabar-bright);
+  }
+
+  /* ---------- РАЗДЕЛИТЕЛЬ-ОРНАМЕНТ ---------- */
+  .divider {
+    text-align: center;
+    margin: 36px 0;
+    color: var(--ink-soft);
+    font-family: 'Noto Serif TC', serif;
+    letter-spacing: 18px;
+    font-size: 14px;
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  /* ---------- ЗАПЕЧАТАННАЯ СТРАНИЦА ---------- */
+  .sealed-page .card {
+    background: rgba(36,31,25,0.92);
+    color: #cfc0a0;
+    border-color: var(--cinnabar);
+  }
+  .sealed-page .card::before, .sealed-page .card::after { border-color: var(--cinnabar); }
+  .sealed-page .card-header { border-bottom-color: rgba(158,43,37,0.4); }
+  .sealed-title {
+    font-family: 'Ma Shan Zheng', serif;
+    font-size: 44px; text-align: center;
+    color: var(--cinnabar-bright);
+    margin-bottom: 6px;
+  }
+  .sealed-sub {
+    text-align: center; font-size: 12px; letter-spacing: 3px; font-style: italic;
+    color: rgba(207,192,160,0.6);
+    border-bottom: 1px solid rgba(158,43,37,0.4);
+    padding-bottom: 14px; margin-bottom: 20px;
+  }
+  .sealed-page p { margin-bottom: 14px; }
+  .redacted-ink {
+    background: #171310; color: #171310;
+    padding: 0 10px; user-select: none;
+  }
+  .sealed-warning {
+    border: 1px dashed var(--cinnabar);
+    padding: 12px 16px; margin: 18px 0;
+    font-size: 14px; font-style: italic;
+    color: #d9a49f;
+  }
+
+  /* большая полупрозрачная печать поверх запечатанной страницы */
+  .broken-seal-mark {
+    position: absolute; top: 30px; right: 40px;
+    width: 110px; height: 110px;
+    border: 4px solid rgba(184,58,48,0.55);
+    color: rgba(184,58,48,0.55);
+    font-family: 'Noto Serif TC', serif; font-weight: 900;
+    font-size: 30px; line-height: 1.2;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    transform: rotate(12deg);
+    pointer-events: none;
+  }
+
+  /* ---------- МОДАЛКА-ПЕЧАТЬ (вход в архив) ---------- */
+  .seal-modal {
+    position: fixed; inset: 0;
+    background: rgba(23,19,16,0.9);
+    z-index: 20000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+  .seal-modal.active { opacity: 1; visibility: visible; }
+  .seal-window {
+    width: 420px; max-width: 88vw;
+    background: var(--paper);
+    border: 2px solid var(--cinnabar);
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(158,43,37,0.35);
+  }
+  .seal-window .zh-big {
+    font-family: 'Ma Shan Zheng', serif;
+    font-size: 40px; color: var(--cinnabar);
+  }
+  .seal-window .prompt {
+    font-size: 13px; font-style: italic; color: var(--ink-soft);
+    margin: 10px 0 18px;
+  }
+  .seal-input {
+    width: 100%;
+    background: transparent;
+    border: none; border-bottom: 2px solid var(--ink);
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 22px; letter-spacing: 8px;
+    color: var(--ink);
+    padding: 6px;
+    outline: none;
+  }
+  .seal-error {
+    margin-top: 12px; font-size: 13px;
+    color: var(--cinnabar); font-style: italic;
+    min-height: 20px;
+  }
+  .seal-close {
+    margin-top: 16px;
+    background: none; border: 1px solid var(--ink-soft);
+    padding: 6px 20px;
+    font-family: 'EB Garamond', serif; font-style: italic;
+    font-size: 13px; color: var(--ink-soft);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .seal-close:hover { background: var(--ink); color: var(--paper); }
+
+  @keyframes shakeWindow {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+  .shake { animation: shakeWindow 0.25s ease; }
+
+  /* ---------- ЭКРАН ЗАГРУЗКИ: РАЗВОРАЧИВАЮЩИЙСЯ СВИТОК ---------- */
+  .loading-overlay {
+    position: fixed; inset: 0;
+    background: #241f19;
+    z-index: 30000;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease;
+  }
+  .loading-overlay.fade-out { opacity: 0; pointer-events: none; }
+  .loading-scroll {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+  .loading-glyphs {
+    display: flex; gap: 26px;
+  }
+  .loading-glyphs span {
+    font-family: 'Ma Shan Zheng', serif;
+    font-size: 54px; color: var(--paper);
+    opacity: 0;
+    animation: inkAppear 0.9s ease forwards;
+  }
+  .loading-glyphs span:nth-child(1) { animation-delay: 0.2s; }
+  .loading-glyphs span:nth-child(2) { animation-delay: 0.7s; }
+  .loading-glyphs span:nth-child(3) { animation-delay: 1.2s; }
+  .loading-glyphs span:nth-child(4) { animation-delay: 1.7s; }
+  @keyframes inkAppear {
+    0% { opacity: 0; filter: blur(6px); transform: scale(1.3); }
+    100% { opacity: 1; filter: blur(0); transform: scale(1); }
+  }
+  .loading-sub {
+    font-size: 12px; letter-spacing: 4px; font-style: italic;
+    color: rgba(230,218,191,0.5);
+    opacity: 0; animation: inkAppear 1s ease 2.2s forwards;
+  }
+  .loading-skip {
+    background: none; border: 1px solid rgba(230,218,191,0.4);
+    color: rgba(230,218,191,0.6);
+    font-family: 'EB Garamond', serif; font-style: italic;
+    padding: 5px 18px; font-size: 12px; letter-spacing: 2px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .loading-skip:hover { border-color: var(--paper); color: var(--paper); }
+
+  /* ---------- СТРАНИЦЫ ---------- */
+  .page { display: none; }
+  .page.active-page { display: block; animation: pageInk 0.5s ease; }
+  @keyframes pageInk {
+    0% { opacity: 0; filter: blur(3px); }
+    100% { opacity: 1; filter: blur(0); }
+  }
+
+  /* ---------- ПОДВАЛ ---------- */
+  .footer {
+    margin-top: 40px;
+    padding: 20px 8px;
+    border-top: 3px double var(--ink);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    font-size: 11px; letter-spacing: 2px; font-style: italic;
+    color: var(--ink-soft);
+  }
+  .footer .zh { font-family: 'Noto Serif TC', serif; font-style: normal; }
+
+  /* ---------- АДАПТИВ ---------- */
+  @media (max-width: 900px) {
+    .top-grid { grid-template-columns: 1fr; }
+    .artifact-list { grid-template-columns: 1fr; }
+    .big-name { font-size: 60px; }
+    .side-nav {
+      position: fixed; top: auto; bottom: 0; left: 0; right: 0;
+      transform: none;
+      flex-direction: row; justify-content: center;
+      background: var(--paper-dark);
+      border-top: 1px solid var(--ink-soft);
+      padding: 6px; gap: 6px;
+    }
+    .nav-tab {
+      writing-mode: horizontal-tb;
+      border-radius: 4px; border-right: 1px solid var(--ink-soft);
+      transform: none; padding: 8px 10px;
+      font-size: 14px; letter-spacing: 2px;
+    }
+    .nav-tab .tab-sub { display: none; }
+    .scroll-edge { width: 24px; }
+    .scroll-edge .edge-text { font-size: 10px; letter-spacing: 6px; }
+    .wrapper { padding-left: 32px; padding-bottom: 80px; }
+    .v-line { font-size: 18px; letter-spacing: 8px; max-height: 300px; }
+    .info-label { width: 130px; }
+    .broken-seal-mark { width: 76px; height: 76px; font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="paper-grain"></div>
+<div class="paper-vignette"></div>
+
+<!-- КРОМКА СВИТКА -->
+<div class="scroll-edge">
+  <div class="edge-text">大清欽命行人司卷宗</div>
+  <div class="edge-seal">卷</div>
+</div>
+
+<!-- ЭКРАН ЗАГРУЗКИ -->
+<div id="loadingOverlay" class="loading-overlay">
+  <div class="loading-scroll">
+    <div class="loading-glyphs">
+      <span>沈</span><span>聿</span><span>之</span><span>卷</span>
+    </div>
+    <div class="loading-sub">Свиток Шэнь Юя · открывается</div>
+    <button class="loading-skip" id="skipLoadingBtn">развернуть сразу</button>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- ШАПКА -->
+  <div class="doc-header">
+    <div class="header-name-block">
+      <div class="big-name">沈聿</div>
+      <div class="name-latin">
+        <div class="translit">Шэнь Юй · Shen Yu</div>
+        <div class="western-note">в бумагах Запада — «Mr. Shen», «господинъ Шэнь», «M. Chen»</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="dossier-line">Личный свиток · посланник по делам ночи</div>
+      <div class="dossier-year">咸豐二年 · год 1852-й</div>
+    </div>
+    <div class="seal" id="headerSeal" title="печать">沈聿之印</div>
+  </div>
+
+  <div class="status-line">
+    <span class="zh">生於嘉靖二十六年</span>
+    <span>рождён в 26-й год девиза Цзяцзин, династия Мин · 1547</span>
+    <span>возраст: 305 лет · <span class="zh">三百零五歲</span></span>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="side-nav">
+    <div class="nav-tab active" data-page="main">名帖<span class="tab-sub">визитка</span></div>
+    <div class="nav-tab" data-page="bio">身世<span class="tab-sub">биография</span></div>
+    <div class="nav-tab" data-page="mind">性情<span class="tab-sub">характер</span></div>
+    <div class="nav-tab" data-page="night">夜行<span class="tab-sub">ночь</span></div>
+    <div class="nav-tab" data-page="ties">交遊<span class="tab-sub">связи</span></div>
+    <div class="nav-tab" data-page="things">行囊<span class="tab-sub">вещи</span></div>
+    <div class="nav-tab sealed-tab" data-page="sealed">封<span class="tab-sub">запечатано</span></div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 1: ВИЗИТКА ===== -->
+  <div id="page-main" class="page active-page">
+    <div class="top-grid">
+      <div class="portrait-frame">
+        <div class="portrait-inner">
+          <div class="portrait-placeholder">沈</div>
+          <!-- <img src="portrait.jpg" alt="Портрет Шэнь Юя"> -->
+        </div>
+        <div class="portrait-caption">畫於倫敦・一八五一</div>
+        <div class="portrait-seal">存真</div>
+      </div>
+
+      <div>
+        <div class="card">
+          <div class="card-header"><span class="zh-title">名帖</span><span class="en-title">Carte de visite</span></div>
+          <div class="card-body">
+            <div class="info-row"><div class="info-label">Имя <span class="zh">姓名</span></div><div class="info-value">Шэнь Юй (沈聿). Юй — «кисть для письма»; имя, данное отцом-каллиграфом.</div></div>
+            <div class="info-row"><div class="info-label">Второе имя <span class="zh">字</span></div><div class="info-value">Цзиньхэ (静河) — «тихая река»</div></div>
+            <div class="info-row"><div class="info-label">Рождение <span class="zh">生辰</span></div><div class="info-value">1547 год, Сучжоу, империя Мин. Обращён в 1578-м.</div></div>
+            <div class="info-row"><div class="info-label">Занятие <span class="zh">職</span></div><div class="info-value">Посланник Срединного двора ночи. Ведёт переговоры со старейшинами Европы и Нового Света от лица китайских кланов.</div></div>
+            <div class="info-row"><div class="info-label">Нынешнее место <span class="zh">現居</span></div><div class="info-value">Лондон, съёмный дом у Гайд-парка. Домом не называет.</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><span class="zh-title">外觀</span><span class="en-title">Внешность</span></div>
+          <div class="card-body">
+            <div class="info-row"><div class="info-label">Облик <span class="zh">相貌</span></div><div class="info-value">Мужчина на вид тридцати лет. Высок для южанина, худ, движения экономные, как у писца. Кожа бледная, без старческих пятен — и без живого тепла.</div></div>
+            <div class="info-row"><div class="info-label">Платье <span class="zh">衣</span></div><div class="info-value">На переговорах — европейский сюртук безупречного кроя. Дома — ханьфу эпохи Мин, которое не носили уже двести лет. Косу, навязанную Цин, не носит: мёртвому маньчжурский закон не писан.</div></div>
+            <div class="info-row"><div class="info-label">Приметы <span class="zh">特徵</span></div><div class="info-value">Пальцы в старых пятнах туши, которые не сходят три века. Не отражается в серебряных зеркалах — в лондонских салонах избегает стоять к ним спиной.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vertical-quote-block">
+      <div class="v-line">身在四海</div>
+      <div class="v-line">心在故國</div>
+      <div class="v-line translation">«Телом — среди четырёх морей, сердцем — в утраченной стране». Надпись, которую он оставляет на внутренней стороне крышки дорожного сундука в каждом городе.</div>
+    </div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 2: БИОГРАФИЯ ===== -->
+  <div id="page-bio" class="page">
+    <div class="card">
+      <div class="card-header"><span class="zh-title">身世</span><span class="en-title">Жизнеописание</span></div>
+      <div class="card-body">
+        <p>Родился в Сучжоу в семье каллиграфа. Готовился к государственным экзаменам, служил младшим письмоводителем. В 1578 году, сопровождая торговый караван в Гуанчжоу, встретил того, кого принял за учёного-отшельника. Тот искал не ученика — наследника архива, который нужно вести вечно.</p>
+        <p>Пережил падение Мин в 1644-м. Это — главная рана: страна, которой он присягал, умерла, а он — нет. Цин он служит как чиновник служит должности: без любви, по необходимости. Когда старейшины ночного Китая поняли, что западные вампиры приходят вместе с западными пушками, они отправили на переговоры того, кто уже умел ждать столетиями.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="zh-title">年表</span><span class="en-title">Хронология</span></div>
+      <div class="card-body">
+        <div class="timeline">
+          <div class="timeline-item"><div class="tl-year">1547 <span class="era">Цзяцзин 26</span></div><div class="tl-title">Рождение в Сучжоу</div><div class="tl-desc">Семья каллиграфа; тушь, бумага, экзамены.</div></div>
+          <div class="timeline-item"><div class="tl-year">1578 <span class="era">Ваньли 6</span></div><div class="tl-title">Обращение</div><div class="tl-desc">Гуанчжоу. Смерть, которую он не выбирал, и долг, который принял.</div></div>
+          <div class="timeline-item"><div class="tl-year">1644 <span class="era">падение Мин</span></div><div class="tl-title">Смерть страны</div><div class="tl-desc">Сжёг свои экзаменационные сочинения. Первый и последний раз плакал кровью.</div></div>
+          <div class="timeline-item"><div class="tl-year">1793</div><div class="tl-title">Посольство Макартни</div><div class="tl-desc">Впервые увидел англичан вблизи. Понял, что они вернутся — и не с дарами.</div></div>
+          <div class="timeline-item"><div class="tl-year">1842</div><div class="tl-title">Нанкинский договор</div><div class="tl-desc">Опиумная война проиграна. Старейшины отправляют его на Запад — договариваться с ночью, раз день уже проигран.</div></div>
+          <div class="timeline-item"><div class="tl-year">1852 <span class="era">ныне</span></div><div class="tl-title">Лондон — Петербург — Вена</div
+<div class="timeline-item"><div class="tl-year">1852 <span class="era">ныне</span></div><div class="tl-title">Лондон — Петербург — Вена</div><div class="tl-desc">Десятый год разъездов. Тайпинское восстание полыхает дома, а он подписывает бумаги в чужих гостиных и считает годы до возвращения.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="zh-title">洋名</span><span class="en-title">Имена, данные чужими</span></div>
+      <div class="card-body">
+        <div class="alias-grid">
+          <div class="alias-card">
+            <div class="alias-city">Лондон</div>
+            <div class="alias-name">Mr. Julian Shen</div>
+            <div class="alias-note">«Джулиан» — потому что англичанам лень выговаривать Юй. Он не поправляет. Уже не поправляет.</div>
+          </div>
+          <div class="alias-card">
+            <div class="alias-city">Санктъ-Петербургъ</div>
+            <div class="alias-name">Господинъ Шень</div>
+            <div class="alias-note">В русских бумагах его фамилию пишут пятью разными способами. Ни один не верен.</div>
+          </div>
+          <div class="alias-card">
+            <div class="alias-city">Вена</div>
+            <div class="alias-name">Herr von Schen</div>
+            <div class="alias-note">Австрийский двор ночи присвоил ему дворянскую приставку. Он находит это оскорбительно смешным.</div>
+          </div>
+          <div class="alias-card">
+            <div class="alias-city">Париж</div>
+            <div class="alias-name">M. Chen de la Chine</div>
+            <div class="alias-note">Даже фамилию перепутали. Подписал так три договора — и все три ночи потом переписывал своё настоящее имя кистью, чтобы не забыть руку.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 3: ХАРАКТЕР ===== -->
+  <div id="page-mind" class="page">
+    <div class="card">
+      <div class="card-header"><span class="zh-title">性情</span><span class="en-title">Нрав и сердце</span></div>
+      <div class="card-body">
+        <p>Шэнь Юй вежлив той вежливостью, которая старше всех его собеседников. Он никогда не повышает голос — за триста лет он понял, что тише говорит тот, кого всё равно будут слушать. На переговорах он безупречен: терпелив, точен, находит компромисс там, где старейшины Европы видят только повод для войны кланов.</p>
+        <p>Но безупречность — это стена. За ней человек, который триста лет не говорил ни с кем на языке своего детства. Диалект Сучжоу XVI века мёртв; даже китайские вампиры моложе двухсот лет звучат для него как иностранцы. Он ведёт переписку с десятками дворов ночи — и не получает ни одного письма, адресованного не «посланнику», а ему.</p>
+        <p>Его преданность Китаю абсолютна и безответна: страна, которую он любит, умерла в 1644-м; страна, которую он представляет, шлёт его прочь; страна, в которой он живёт, зовёт его Джулианом.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="zh-title">品評</span><span class="en-title">Оценка качеств</span></div>
+      <div class="card-body">
+        <div class="stat-item"><div class="stat-header"><span class="stat-name"><span class="zh">忍</span>Терпение</span><span class="stat-value">十分 · 10/10</span></div><div class="stat-bar"><div class="stat-fill" data-width="100%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name"><span class="zh">辯</span>Красноречие</span><span class="stat-value">九分 · 9/10</span></div><div class="stat-bar"><div class="stat-fill" data-width="90%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name"><span class="zh">學</span>Учёность</span><span class="stat-value">九分 · 9/10</span></div><div class="stat-bar"><div class="stat-fill" data-width="90%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name"><span class="zh">武</span>Боевое искусство</span><span class="stat-value">五分 · 5/10</span></div><div class="stat-bar"><div class="stat-fill" data-width="50%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name"><span class="zh">信</span>Доверие к людям</span><span class="stat-value">二分 · 2/10</span></div><div class="stat-bar"><div class="stat-fill" data-width="20%"></div></div></div>
+        <div class="stat-item"><div class="stat-header"><span class="stat-name"><span class="zh">歸</span>Чувство дома</span><span class="stat-value">一分 · 1/10</span></div><div class="stat-bar"><div class="stat-fill" data-width="10%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="zh-title">習癖</span><span class="en-title">Привычки и странности</span></div>
+      <div class="card-body">
+        <div class="info-row"><div class="info-label">Каллиграфия <span class="zh">書法</span></div><div class="info-value">Каждую ночь, где бы ни был, растирает тушь и пишет один лист. Не письма — просто чтобы рука помнила. Листы сжигает: некому отправлять.</div></div>
+        <div class="info-row"><div class="info-label">Чай <span class="zh">茶</span></div><div class="info-value">Пить не может уже триста лет, но заваривает по всем правилам и смотрит на пар. Английский чай с молоком считает варварством и говорит об этом единственную резкость, которую себе позволяет.</div></div>
+        <div class="info-row"><div class="info-label">Счёт времени <span class="zh">曆</span></div><div class="info-value">В деловых бумагах пишет европейские даты, в личных — годы девизов Мин, как будто династия не пала: «год 208-й Чунчжэня». Это его тихое, никем не замеченное восстание.</div></div>
+        <div class="info-row"><div class="info-label">Речь <span class="zh">言</span></div><div class="info-value">Говорит на семи языках. Во сне — только на сучжоуском диалекте, которого больше не существует.</div></div>
+      </div>
+    </div>
+
+    <div class="vertical-quote-block">
+      <div class="v-line">故國不堪回首</div>
+      <div class="v-line">月明中</div>
+      <div class="v-line translation">«Нестерпимо оборачиваться на утраченную страну при свете луны». Ли Юй, император-поэт, тоже переживший свою династию. Единственные стихи, которые Шэнь Юй цитирует вслух.</div>
+    </div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 4: НОЧЬ ===== -->
+  <div id="page-night" class="page">
+    <div class="card night-card">
+      <div class="card-header"><span class="zh-title">夜行</span><span class="en-title">Природа ночи</span></div>
+      <div class="card-body">
+        <div class="info-row"><div class="info-label">Линия крови <span class="zh">血脈</span></div><div class="info-value">Линия Архивистов (守卷者) — южнокитайская ветвь, ведущая счёт от эпохи Тан. Их дар — память и слово, не сила.</div></div>
+        <div class="info-row"><div class="info-label">Создатель <span class="zh">尊者</span></div><div class="info-value">Старец Вэй (魏公), хранитель архива Гуанчжоу. Упокоился добровольно в 1721 году, передав Шэнь Юю архив и одиночество. Шэнь Юй не простил ему ни того, ни другого.</div></div>
+        <div class="info-row"><div class="info-label">Питание <span class="zh">食</span></div><div class="info-value">Пьёт мало и брезгливо, как человек, вынужденный есть чужую кухню. Не убивает: смерть донора — брак в работе письмоводителя.</div></div>
+      </div>
+    </div>
+
+    <div class="card night-card">
+      <div class="card-header"><span class="zh-title">異能</span><span class="en-title">Дары</span></div>
+      <div class="card-body">
+        <div class="info-row"><div class="info-label">Память туши <span class="zh">墨記</span></div><div class="info-value">Помнит дословно всё, что когда-либо прочёл или подписал. Триста лет договоров, писем, лиц. Это дар для посланника и проклятие для одинокого: он не умеет забывать.</div></div>
+        <div class="info-row"><div class="info-label">Тихая река <span class="zh">静河</span></div><div class="info-value">Голос, который успокаивает. Не подчиняет — именно успокаивает: гнев, страх, жажду. На переговорах кланов это оружие сильнее клыков.</div></div>
+        <div class="info-row"><div class="info-label">Чтение руки <span class="zh">觀筆</span></div><div class="info-value">По почерку видит состояние писавшего: ложь, страх, болезнь, близкую смерть. Европейские договоры для него — исповеди, которых авторы не хотели давать.</div></div>
+      </div>
+    </div>
+
+    <div class="card night-card">
+      <div class="card-header"><span class="zh-title">忌</span><span class="en-title">Слабости и запреты</span></div>
+      <div class="card-body">
+        <ul class="weakness-list">
+          <li>Солнце — как у всех детей ночи. Но он стар: рассвет не убивает мгновенно, а сжигает медленно, как бумагу с угла.</li>
+          <li>Порог дома: не может войти без приглашения. В дипломатии это удобно оформлено протоколом — но означает, что за триста лет он не вошёл никуда, где его не ждали по бумаге.</li>
+          <li>Серебряные зеркала не отражают его. Дагеротип — новинка 1840-х — тоже слеп к нему, и это тревожит: Запад изобретает всё новые способы видеть.</li>
+          <li>Обет линии Архивистов: не лгать письменно. Может умолчать, может составить фразу с двойным дном — но написанная им ложь сжигает руку, как солнце.</li>
+          <li>Утрата имени. Если однажды не останется никого, кто знает его как Шэнь Юя, а не «мистера Шена», — линия Архивистов считает такого мёртвым. Он подозревает, что это не метафора.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 5: СВЯЗИ ===== -->
+  <div id="page-ties" class="page">
+    <div class="card">
+      <div class="card-header"><span class="zh-title">交遊</span><span class="en-title">Связи и знакомства</span></div>
+      <div class="card-body">
+<div class="relation-item">
+          <div class="relation-glyph">師</div>
+          <div class="relation-info">
+            <div class="relation-name">Старец Вэй · 魏公</div>
+            <div class="relation-status">создатель · упокоился в 1721</div>
+            <div class="relation-desc">Учитель, отец, тюремщик — все три слова верны. Шэнь Юй до сих пор мысленно спорит с ним и до сих пор проигрывает эти споры. На столе всегда лежит его последнее письмо, нераспечатанное: пока оно закрыто, разговор не окончен.</div>
+          </div>
+        </div>
+        <div class="relation-item">
+          <div class="relation-glyph">主</div>
+          <div class="relation-info">
+            <div class="relation-name">Совет Девяти Свечей · 九燭議會</div>
+            <div class="relation-status">старейшины ночного Китая · господа</div>
+            <div class="relation-desc">Те, кто отправил его на Запад. Ценят безмерно — и именно поэтому не позволяют вернуться: незаменимость оказалась худшей из тюрем. Их письма начинаются со слов «доверенному брату» и никогда — с его имени.</div>
+          </div>
+        </div>
+        <div class="relation-item">
+          <div class="relation-glyph">敵</div>
+          <div class="relation-info">
+            <div class="relation-name">Лорд Кроуфорд · Совет Лондона</div>
+            <div class="relation-status">оппонент за столом · 10 лет переговоров</div>
+            <div class="relation-desc">Английский старейшина, обращённый при Тюдорах. Единственный на Западе, кто выучил, как правильно произносится «Шэнь Юй» — и использует это как оружие, произнося верно только тогда, когда хочет что-то получить. Шэнь Юй это видит. И всё равно каждый раз что-то уступает.</div>
+          </div>
+        </div>
+        <div class="relation-item">
+          <div class="relation-glyph">友</div>
+          <div class="relation-info">
+            <div class="relation-name">Анна Каренина фон Штерн · Петербург</div>
+            <div class="relation-status">почти друг · переписка с 1847</div>
+            <div class="relation-desc">Юная по меркам ночи — ей нет и двухсот. Единственная, кто пишет ему письма не по делу: о снеге, о музыке, о глупостях. Он отвечает сухо и коротко, а черновики ответов — длинные, живые — сжигает вместе с каллиграфией. Привязанность — роскошь, которую посланник не может себе позволить. Так он себе говорит.</div>
+          </div>
+        </div>
+        <div class="relation-item">
+          <div class="relation-glyph">僕</div>
+          <div class="relation-info">
+            <div class="relation-name">Лао Гуй · 老桂</div>
+            <div class="relation-status">слуга · смертный · при нём с 1839</div>
+            <div class="relation-desc">Старик-кантонец, ведёт его дом и дневные дела. Единственный живой человек, с которым Шэнь Юй говорит по-китайски каждый день. Лао Гую шестьдесят восемь. Шэнь Юй запрещает себе считать, сколько ему осталось, — и считает каждый вечер.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vertical-quote-block">
+      <div class="v-line">知音少</div>
+      <div class="v-line">弦斷有誰聽</div>
+      <div class="v-line translation">«Мало тех, кто понимает мою музыку. Струна порвётся — кто услышит?» Юэ Фэй. Строка, подчёркнутая его рукой в единственной книге, которую он возит с собой триста лет.</div>
+    </div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 6: ВЕЩИ ===== -->
+  <div id="page-things" class="page">
+    <div class="card">
+      <div class="card-header"><span class="zh-title">行囊</span><span class="en-title">Дорожный сундук</span></div>
+      <div class="card-body">
+        <div class="artifact-list">
+          <div class="artifact">
+            <div class="artifact-name"><span class="zh">墨</span>Тушечница отца</div>
+            <div class="artifact-desc">Каменная тушечница из Сучжоу, 1540-е. Единственный предмет, переживший с ним все триста лет и все переезды. Трещина поперёк — от падения Нанкина; он не чинит её из принципа.</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact-name"><span class="zh">卷</span>Архив линии</div>
+            <div class="artifact-desc">Сундук свитков: договоры ночного Китая за девять веков. Формально — причина, по которой он жив. Фактически — единственное, что Совет не решится потерять вместе с ним.</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact-name"><span class="zh">衣</span>Ханьфу эпохи Мин</div>
+            <div class="artifact-desc">Три сундука одежды покроя, умершего двести лет назад. Шьёт сам — последний портной, знавший этот крой, умер при Канси. Надевает только за закрытыми дверями.</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact-name"><span class="zh">錶</span>Лондонские часы</div>
+            <div class="artifact-desc">Подарок лорда Кроуфорда, безупречная работа. Шэнь Юй носит их, сверяется с ними, зависит от них — и ненавидит спокойной, аккуратной ненавистью. Западное время у него в кармане. Это почти метафора.</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact-name"><span class="zh">書</span>Сборник Юэ Фэя и Ли Юя</div>
+            <div class="artifact-desc">Печать эпохи Ваньли, куплен ещё живым. Поля исписаны заметками — почерк меняется от столетия к столетию, и по этой книге можно прочесть, как он старел, не старея.</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact-name"><span class="zh">土</span>Мешочек земли</div>
+            <div class="artifact-desc">Горсть земли из Сучжоу, взятая в 1842-м перед отплытием. Западные вампиры спят на родной земле по нужде — его линии это не требуется. Он всё равно кладёт мешочек под подушку. По нужде иного рода.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="zh-title">語錄</span><span class="en-title">Записанные слова</span></div>
+      <div class="card-body">
+        <div class="info-row"><div class="info-label">За столом переговоров</div><div class="info-value">«Ваш совет существует четыреста лет и гордится этим. Я понимаю. Мой архив помнит девять столетий, и потому мы никуда не торопимся».</div></div>
+        <div class="info-row"><div class="info-label">Лорду Кроуфорду</div><div class="info-value">«Вы продаёте нам опиум и покупаете наш чай. Позвольте хотя бы ночи обойтись без этой арифметики».</div></div>
+        <div class="info-row"><div class="info-label">Анне, в письме</div><div class="info-value">«Вы спрашиваете, скучаю ли я по дому. Сударыня, я скучаю по стране, которой нет на картах. По ней невозможно скучать меньше».</div></div>
+        <div class="info-row"><div class="info-label">Лао Гую, тихо</div><div class="info-value">«Говори со мной ещё немного. Неважно о чём. О цене на рис. Просто — на нашем языке».</div></div>
+      </div>
+    </div>
+
+    <div class="divider">◆ ◇ ◆</div>
+  </div>
+
+  <!-- ===== СТРАНИЦА 7: ЗАПЕЧАТАНО ===== -->
+  <div id="page-sealed" class="page sealed-page">
+    <div class="card">
+      <div class="broken-seal-mark">封印<br>已破</div>
+      <div class="card-header"><span class="zh-title">密卷</span><span class="en-title">Запечатанный свиток · не для чужих глаз</span></div>
+      <div class="card-body">
+        <div class="sealed-title">歸鄉之約</div>
+        <div class="sealed-sub">«Уговор о возвращении» · писано рукой Шэнь Юя · хранится на дне архива</div>
+
+        <p>Я, рождённый Шэнь Юем в Сучжоу в двадцать шестой год Цзяцзина, записываю это, ибо линия Архивистов не лжёт письменно — а значит, хотя бы здесь я не солгу и себе.</p>
+
+        <p>Совет Девяти Свечей не вернёт меня. Я знал это, поднимаясь на корабль в 1842-м. Посланник, который нужен, — это посланник, которого держат вдали. Мои письма с просьбой о возвращении встречают отказ уже <span class="redacted-ink">десять лет подряд</span>, и отказы становятся всё вежливее. Вежливость Совета — мера окончательности.</p>
+
+        <p>Потому записываю уговор с самим собой. Когда умрёт Лао Гуй — последний, кто зовёт меня по имени каждый день, — я перестану просить. Я закрою архив, оставлю часы Кроуфорда на каминной полке и вернусь без разрешения. Пешком, если придётся. Совет сочтёт это изменой. Пусть. Изменить стране, которой нет, невозможно; изменить себе — я уже почти успел.</p>
+
+        <div class="sealed-warning">Ниже — строка, которую он записал и трижды пытался сжечь. Бумага не горит: обет линии признал её правдой, а правду Архивист уничтожить не может.</div>
+
+        <p>«Я боюсь не солнца и не серебра. Я боюсь, что когда я вернусь, Сучжоу не узнает меня — и это будет справедливо, потому что я сам узнаю́ себя всё реже. <span class="redacted-ink">Если однажды я откликнусь на имя Джулиан прежде, чем на имя Юй, — пусть рассвет застанет меня в дороге.</span>»</p>
+
+        <p style="text-align:right; font-family:'Noto Serif TC',serif; margin-top:24px;">崇禎二百二十五年 · 沈聿 手書<br><span style="font-size:12px; font-style:italic; font-family:'EB Garamond',serif; color:rgba(207,192,160,0.6);">«год 225-й Чунчжэня» — по календарю династии, павшей двести восемь лет назад</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПОДВАЛ -->
+  <div class="footer">
+    <span class="zh">大清欽命行人司 · 夜部卷宗</span>
+    <span>Анкета персонажа · 1852 · составлено для сторонних глаз, кроме страницы под печатью</span>
+    <span class="zh">咸豐二年錄</span>
+  </div>
+
+</div><!-- /wrapper -->
+
+  <!-- МОДАЛКА-ПЕЧАТЬ -->
+<div class="seal-modal" id="sealModal">
+  <div class="seal-window" id="sealWindow">
+    <div class="zh-big">封印未破</div>
+    <div class="prompt">Свиток запечатан киноварью.<br>Назовите год рождения посланника, чтобы сломать печать.</div>
+    <input type="password" class="seal-input" id="sealInput" maxlength="8" autocomplete="off">
+    <div class="seal-error" id="sealError"></div>
+    <button class="seal-close" id="sealClose">отступить</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // === ЭКРАН ЗАГРУЗКИ ===
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const skipBtn = document.getElementById('skipLoadingBtn');
+
+    function finishLoading() {
+      loadingOverlay.classList.add('fade-out');
+      setTimeout(() => { loadingOverlay.style.display = 'none'; }, 800);
+    }
+    // сам закрывается после того, как иероглифы проявились
+    const loadingTimer = setTimeout(finishLoading, 3400);
+    if (skipBtn) skipBtn.addEventListener('click', () => {
+      clearTimeout(loadingTimer);
+      finishLoading();
+    });
+
+    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
+    const tabs = document.querySelectorAll('.nav-tab');
+    const pages = document.querySelectorAll('.page');
+    const sealedPage = document.getElementById('page-sealed');
+    let sealBroken = false; // печать ещё не сломана
+
+    function openPage(pageId, tabEl) {
+      tabs.forEach(t => t.classList.remove('active'));
+      if (tabEl) tabEl.classList.add('active');
+      pages.forEach(p => p.classList.remove('active-page'));
+      const page = document.getElementById('page-' + pageId);
+      if (page) page.classList.add('active-page');
+      // перезапуск анимации шкал на странице характера
+      if (pageId === 'mind') animateStats();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const pageId = this.getAttribute('data-page');
+
+        // запечатанная страница требует пароль
+        if (pageId === 'sealed' && !sealBroken) {
+          openSealModal();
+          return;
+        }
+        openPage(pageId, this);
+      });
+    });
+
+    // === АНИМАЦИЯ ШКАЛ ===
+    function animateStats() {
+      document.querySelectorAll('#page-mind .stat-fill').forEach(fill => {
+        fill.style.width = '0';
+        // форсируем перерисовку, затем задаём ширину
+        void fill.offsetWidth;
+        fill.style.width = fill.getAttribute('data-width');
+      });
+    }
+
+    // === МОДАЛКА-ПЕЧАТЬ ===
+    const sealModal = document.getElementById('sealModal');
+    const sealWindow = document.getElementById('sealWindow');
+    const sealInput = document.getElementById('sealInput');
+    const sealError = document.getElementById('sealError');
+    const sealClose = document.getElementById('sealClose');
+    const SEAL_CODE = '1547'; // год рождения — поменяй при желании
+
+    function openSealModal() {
+      sealModal.classList.add('active');
+      sealError.textContent = '';
+      sealInput.value = '';
+      setTimeout(() => sealInput.focus(), 100);
+    }
+    function closeSealModal() {
+      sealModal.classList.remove('active');
+    }
+
+    sealClose.addEventListener('click', closeSealModal);
+    sealModal.addEventListener('click', function(e) {
+      if (e.target === sealModal) closeSealModal();
+    });
+
+    sealInput.addEventListener('keypress', function(e) {
+      if (e.key !== 'Enter') return;
+      if (sealInput.value.trim() === SEAL_CODE) {
+        sealBroken = true;
+        closeSealModal();
+        const sealedTab = document.querySelector('.nav-tab[data-page="sealed"]');
+        openPage('sealed', sealedTab);
+      } else {
+        sealError.textContent = 'Печать не поддаётся. Год назван неверно.';
+        sealInput.value = '';
+        sealWindow.classList.remove('shake');
+        void sealWindow.offsetWidth;
+        sealWindow.classList.add('shake');
+      }
+    });
+
+    // Esc закрывает модалку
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sealModal.classList.contains('active')) closeSealModal();
+    });
+
+    // === ПЕЧАТЬ В ШАПКЕ: оттиск при клике ===
+    const headerSeal = document.getElementById('headerSeal');
+    if (headerSeal) {
+      headerSeal.addEventListener('click', function(e) {
+        // оттиск печати появляется в случайном месте рядом с курсором
+        const stamp = document.createElement('div');
+        stamp.textContent = '沈聿之印';
+        const angle = (Math.random() * 24 - 12).toFixed(1);
+        stamp.style.cssText = `
+          position: fixed;
+          left: ${e.clientX - 30 + (Math.random() * 40 - 20)}px;
+          top: ${e.clientY - 30 + (Math.random() * 40 - 20)}px;
+          width: 60px; height: 60px;
+          border: 2px solid rgba(158,43,37,0.75);
+          color: rgba(158,43,37,0.75);
+          font-family: 'Noto Serif TC', serif;
+          font-weight: 900; font-size: 20px; line-height: 1.15;
+          display: flex; align-items: center; justify-content: center;
+          text-align: center;
+          transform: rotate(${angle}deg);
+          pointer-events: none;
+          z-index: 9999;
+          transition: opacity 2.5s ease;
+        `;
+        document.body.appendChild(stamp);
+        // оттиск медленно выцветает, как настоящая киноварь
+        setTimeout(() => { stamp.style.opacity = '0'; }, 1200);
+        setTimeout(() => stamp.remove(), 3800);
+      });
+    }
+
+    // === ГОД ПО ДВУМ КАЛЕНДАРЯМ В ПОДВАЛЕ (пасхалка) ===
+    // при двойном клике на подвал показывает возраст персонажа с точностью до дня
+    const footer = document.querySelector('.footer');
+    if (footer) {
+      footer.addEventListener('dblclick', function() {
+        const msg = document.createElement('div');
+        msg.innerHTML = '三百零五年 · триста пять лет вдали от смерти';
+        msg.style.cssText = `
+          position: fixed; top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          background: rgba(36,31,25,0.95); color: #cfc0a0;
+          border: 1px solid #9e2b25;
+          padding: 18px 34px;
+          font-family: 'EB Garamond', serif; font-style: italic;
+          font-size: 16px; letter-spacing: 2px;
+          z-index: 10000; text-align: center;
+          pointer-events: none;
+        `;
+        document.body.appendChild(msg);
+        setTimeout(() => { msg.style.transition = 'opacity 0.8s'; msg.style.opacity = '0'; }, 1800);
+        setTimeout(() => msg.remove(), 2700);
+      });
+    }
+
+    // первичная анимация шкал, если открыли сразу страницу характера
+    animateStats();
+  });
+</script>
+</body>
+</html>
