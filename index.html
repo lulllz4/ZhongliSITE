@@ -3,972 +3,1057 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>血月之卷 — Анкета</title>
+<title>血月之卷</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;600&family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500&family=Noto+Serif+SC:wght@200;400;600&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   基础 — БАЗА
-============================================================ */
+/* ════════════════════════════════════════════════════════════
+   ОСНОВА. Сдержанность. Порядок. Вес.
+════════════════════════════════════════════════════════════ */
 :root{
-  --bg-deep:      #1a0f08;
-  --bg-dark:      #241407;
-  --bg-panel:     #2e1c0e;
-  --bg-panel-2:   #3a2412;
-  --brown-warm:   #5c3a1e;
-  --brown-light:  #8a5a2b;
-  --gold:         #c9a227;
-  --gold-bright:  #e8c860;
-  --gold-pale:    #f0dfa8;
-  --ink:          #e9dcc3;
-  --ink-dim:      #b09a76;
-  --seal-red:     #8e2323;
-  --shadow-gold:  rgba(201,162,39,.35);
+  --void:       #120b06;
+  --ground:     #1b110a;
+  --panel:      #211508;
+  --line-dim:   #3d2a16;
+  --line:       #57402280;
+  --bronze:     #6e532e;
+  --gold:       #a8863d;
+  --gold-hi:    #cfae62;
+  --ink:        #d6c6a4;
+  --ink-dim:    #8d7a58;
+  --ink-faint:  #5f5138;
+  --cinnabar:   #7a1f1a;
+  --hairline:   1px solid var(--line-dim);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg-deep);
+  background:var(--void);
   color:var(--ink);
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Cormorant',serif;
   font-size:18px;
-  line-height:1.7;
+  font-weight:400;
+  line-height:1.85;
   overflow-x:hidden;
-  background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(90,55,20,.25), transparent 55%),
-    radial-gradient(ellipse at 80% 100%, rgba(90,55,20,.2), transparent 55%);
 }
-::selection{background:var(--gold);color:var(--bg-deep)}
-::-webkit-scrollbar{width:10px}
-::-webkit-scrollbar-track{background:var(--bg-dark)}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(--brown-light),var(--gold));border-radius:5px}
+/* тончайшая текстура — сетка, почти невидимая */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(168,134,61,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,134,61,.018) 1px, transparent 1px);
+  background-size:72px 72px;
+}
+/* виньетка */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(0,0,0,.55));
+}
+::selection{background:var(--gold);color:var(--void)}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--void)}
+::-webkit-scrollbar-thumb{background:var(--line-dim)}
+::-webkit-scrollbar-thumb:hover{background:var(--bronze)}
 
 .zh{font-family:'Noto Serif SC',serif}
 
-/* ============================================================
-   ЗАГРУЗОЧНЫЙ ЭКРАН — ПЕЧАТЬ
-============================================================ */
-#loader{
-  position:fixed;inset:0;z-index:1000;
-  background:var(--bg-deep);
+/* ════════════════════════════════════════════════════════════
+   ВХОД
+════════════════════════════════════════════════════════════ */
+#veil{
+  position:fixed;inset:0;z-index:1000;background:var(--void);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity 1.2s ease, visibility 1.2s;
+  transition:opacity 1.6s ease, visibility 1.6s;
 }
-#loader.hidden{opacity:0;visibility:hidden}
-.seal-stamp{
-  width:130px;height:130px;
-  border:4px solid var(--seal-red);
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:64px;color:var(--seal-red);
-  font-family:'Noto Serif SC',serif;font-weight:700;
-  transform:rotate(-6deg) scale(0);
-  animation:stampIn 1s cubic-bezier(.2,1.6,.4,1) .3s forwards;
-  box-shadow:0 0 40px rgba(142,35,35,.3);
+#veil.lifted{opacity:0;visibility:hidden}
+.veil-line{
+  width:1px;height:0;background:var(--gold);
+  animation:lineGrow 1.4s cubic-bezier(.7,0,.3,1) .2s forwards;
 }
-@keyframes stampIn{
-  0%{transform:rotate(-6deg) scale(3);opacity:0}
-  60%{transform:rotate(-6deg) scale(.92);opacity:1}
-  100%{transform:rotate(-6deg) scale(1);opacity:1}
+@keyframes lineGrow{to{height:110px}}
+.veil-char{
+  font-family:'Noto Serif SC',serif;font-weight:200;
+  font-size:54px;color:var(--gold);margin:26px 0;
+  opacity:0;animation:slowIn 1.8s ease 1.2s forwards;
 }
-.loader-text{
-  margin-top:28px;letter-spacing:.5em;text-transform:uppercase;
-  font-size:13px;color:var(--gold);opacity:0;
-  animation:fadeUp 1s ease 1s forwards;
+.veil-caption{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.9em;
+  text-transform:uppercase;color:var(--ink-faint);padding-left:.9em;
+  opacity:0;animation:slowIn 1.8s ease 1.8s forwards;
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes slowIn{to{opacity:1}}
 
-/* ============================================================
-   ФОНОВЫЕ СЛОИ
-============================================================ */
-#emberCanvas{position:fixed;inset:0;z-index:1;pointer-events:none}
-.bg-dragon{
-  position:fixed;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  font-family:'Noto Serif SC',serif;
-  font-size:min(75vw,700px);
-  color:rgba(201,162,39,.03);
-  z-index:0;pointer-events:none;user-select:none;
-  animation:dragonBreath 12s ease-in-out infinite;
-}
-@keyframes dragonBreath{
-  0%,100%{color:rgba(201,162,39,.025)}
-  50%{color:rgba(201,162,39,.055)}
+/* ════════════════════════════════════════════════════════════
+   ПЫЛЬ — редкая, медленная
+════════════════════════════════════════════════════════════ */
+#dust{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+/* ════════════════════════════════════════════════════════════
+   ОСЕВАЯ ЛИНИЯ — стержень всего документа
+════════════════════════════════════════════════════════════ */
+.axis{
+  position:fixed;left:50%;top:0;bottom:0;width:1px;z-index:0;
+  background:linear-gradient(transparent, rgba(168,134,61,.10) 15%, rgba(168,134,61,.10) 85%, transparent);
+  pointer-events:none;
 }
 
-/* ============================================================
-   БОКОВЫЕ СВИТКИ-КОЛОННЫ
-============================================================ */
-.pillar{
-  position:fixed;top:0;bottom:0;width:52px;z-index:2;
-  background:linear-gradient(90deg,var(--bg-dark),var(--bg-panel));
-  border-color:var(--brown-warm);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:14px;pointer-events:none;
+/* ════════════════════════════════════════════════════════════
+   МЕАНДР 回 — орнаментальные пояса
+════════════════════════════════════════════════════════════ */
+.meander{
+  height:14px;margin:0 auto;max-width:520px;
+  background-image:repeating-linear-gradient(90deg,
+    var(--line-dim) 0 1px, transparent 1px 7px,
+    var(--line-dim) 7px 8px, transparent 8px 14px);
+  position:relative;opacity:.9;
 }
-.pillar.left{left:0;border-right:1px solid var(--brown-warm)}
-.pillar.right{right:0;border-left:1px solid var(--brown-warm)}
-.pillar span{
-  font-family:'Noto Serif SC',serif;
-  color:var(--gold);opacity:.35;font-size:20px;
+.meander::before,.meander::after{
+  content:'';position:absolute;top:0;bottom:0;width:60px;
+}
+.meander::before{left:0;background:linear-gradient(90deg,var(--void),transparent)}
+.meander::after{right:0;background:linear-gradient(-90deg,var(--void),transparent)}
+
+/* ════════════════════════════════════════════════════════════
+   КАРКАС
+════════════════════════════════════════════════════════════ */
+.sheet{position:relative;z-index:2;max-width:920px;margin:0 auto;padding:0 28px}
+
+/* ════════════════════════════════════════════════════════════
+   ФРОНТИСПИС
+════════════════════════════════════════════════════════════ */
+.frontis{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  position:relative;padding:60px 0;
+}
+/* вертикальные надписи по краям фронтисписа */
+.frontis-side{
+  position:absolute;top:50%;transform:translateY(-50%);
   writing-mode:vertical-rl;
-  animation:pillarGlow 6s ease-in-out infinite;
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:15px;
+  letter-spacing:.9em;color:var(--ink-faint);
 }
-.pillar span:nth-child(2n){animation-delay:1.5s}
-.pillar span:nth-child(3n){animation-delay:3s}
-@keyframes pillarGlow{0%,100%{opacity:.25}50%{opacity:.65;text-shadow:0 0 12px var(--shadow-gold)}}
-@media(max-width:900px){.pillar{display:none}}
+.frontis-side.l{left:0}
+.frontis-side.r{right:0}
+@media(max-width:700px){.frontis-side{display:none}}
 
-/* ============================================================
-   ОБЩИЙ КОНТЕЙНЕР
-============================================================ */
-.scroll-wrap{position:relative;z-index:3;max-width:960px;margin:0 auto;padding:0 24px}
-
-/* ============================================================
-   ШАПКА
-============================================================ */
-header{
-  padding:90px 0 50px;text-align:center;position:relative;
-}
-.tassel-row{
-  display:flex;justify-content:center;gap:60px;margin-bottom:30px;
-}
-.tassel{
-  display:flex;flex-direction:column;align-items:center;
-  animation:sway 5s ease-in-out infinite;transform-origin:top center;
-}
-.tassel:nth-child(2){animation-delay:.8s}
-.tassel:nth-child(3){animation-delay:1.6s}
-@keyframes sway{0%,100%{transform:rotate(2.5deg)}50%{transform:rotate(-2.5deg)}}
-.tassel .cord{width:2px;height:44px;background:linear-gradient(var(--brown-light),var(--gold))}
-.tassel .bead{
-  width:34px;height:34px;border-radius:50%;
-  border:2px solid var(--gold);
-  background:radial-gradient(circle at 35% 30%, var(--brown-light), var(--bg-dark));
+.crest{
+  width:120px;height:120px;position:relative;margin-bottom:48px;
   display:flex;align-items:center;justify-content:center;
-  font-family:'Noto Serif SC',serif;font-size:15px;color:var(--gold-bright);
-  box-shadow:0 0 18px rgba(201,162,39,.25), inset 0 0 8px rgba(0,0,0,.6);
 }
-.tassel .threads{
-  width:14px;height:30px;margin-top:2px;
-  background:repeating-linear-gradient(90deg,var(--seal-red) 0 2px,transparent 2px 4px);
-  clip-path:polygon(0 0,100% 0,80% 100%,20% 100%);
-  opacity:.8;
+.crest .ring{
+  position:absolute;inset:0;border:1px solid var(--line);
+  transform:rotate(45deg);
 }
-.header-zh{
-  font-family:'Noto Serif SC',serif;font-weight:700;
-  font-size:clamp(40px,7vw,72px);letter-spacing:.25em;
-  background:linear-gradient(120deg,var(--gold) 20%,var(--gold-pale) 40%,var(--gold) 60%);
-  background-size:200% auto;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:shimmer 5s linear infinite;
-}
-@keyframes shimmer{to{background-position:200% center}}
-.header-sub{
-  font-family:'Cinzel',serif;letter-spacing:.55em;text-transform:uppercase;
-  font-size:clamp(11px,1.6vw,15px);color:var(--ink-dim);margin-top:16px;
-}
-.header-dates{
-  margin-top:22px;display:inline-flex;align-items:center;gap:18px;
-  color:var(--gold);font-size:19px;font-style:italic;
-}
-.header-dates .dot{width:5px;height:5px;background:var(--gold);border-radius:50%;transform:rotate(45deg)}
-
-/* Орнаментальный разделитель */
-.divider{
-  display:flex;align-items:center;justify-content:center;gap:16px;
-  margin:46px auto;max-width:640px;
-}
-.divider .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.divider .orn{
-  font-family:'Noto Serif SC',serif;color:var(--gold);font-size:20px;
-  animation:spinSlow 14s linear infinite;
-}
-@keyframes spinSlow{to{transform:rotate(360deg)}}
-
-/* ============================================================
-   СЧЁТЧИК ВОЗРАСТА
-============================================================ */
-.age-block{text-align:center;margin-bottom:20px}
-.age-num{
-  font-family:'Cinzel',serif;font-size:clamp(60px,10vw,110px);
-  color:var(--gold-bright);line-height:1;
-  text-shadow:0 0 35px var(--shadow-gold);
-}
-.age-label{letter-spacing:.4em;text-transform:uppercase;font-size:13px;color:var(--ink-dim)}
-
-/* ============================================================
-   НАВИГАЦИЯ-ВКЛАДКИ
-============================================================ */
-nav.tabs{
-  position:sticky;top:0;z-index:50;
-  display:flex;justify-content:center;flex-wrap:wrap;gap:6px;
-  padding:14px 10px;
-  background:linear-gradient(rgba(26,15,8,.96),rgba(26,15,8,.88));
-  backdrop-filter:blur(6px);
-  border-top:1px solid var(--brown-warm);
-  border-bottom:1px solid var(--brown-warm);
-}
-.tab-btn{
-  font-family:'Cormorant Garamond',serif;font-size:17px;
-  background:none;border:1px solid transparent;color:var(--ink-dim);
-  padding:8px 20px;cursor:pointer;letter-spacing:.12em;
-  transition:.35s;position:relative;
-}
-.tab-btn .zh{font-size:13px;display:block;color:var(--brown-light);transition:.35s;letter-spacing:.3em}
-.tab-btn:hover{color:var(--gold-pale)}
-.tab-btn.active{
-  color:var(--gold-bright);border-color:var(--gold);
-  background:rgba(201,162,39,.07);
-  box-shadow:0 0 20px rgba(201,162,39,.12), inset 0 0 12px rgba(201,162,39,.06);
-}
-.tab-btn.active .zh{color:var(--gold)}
-
-/* ============================================================
-   СЕКЦИИ
-============================================================ */
-section.panel{display:none;padding:60px 0 30px;animation:panelIn .7s ease}
-section.panel.active{display:block}
-@keyframes panelIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-
-.section-title{
-  text-align:center;margin-bottom:44px;position:relative;
-}
-.section-title .zh-big{
-  font-family:'Noto Serif SC',serif;font-size:46px;color:var(--gold);
-  display:block;letter-spacing:.3em;
-}
-.section-title .ru{
-  font-family:'Cinzel',serif;font-size:14px;letter-spacing:.5em;
-  text-transform:uppercase;color:var(--ink-dim);margin-top:8px;display:block;
+.crest .ring.inner{inset:14px;border-color:var(--bronze)}
+.crest .ring.slow{animation:crestTurn 60s linear infinite}
+@keyframes crestTurn{to{transform:rotate(405deg)}}
+.crest .glyph{
+  font-family:'Noto Serif SC',serif;font-weight:400;
+  font-size:42px;color:var(--gold);position:relative;z-index:2;
 }
 
-/* ============================================================
-   КАРТОЧКИ / РАМЫ
-============================================================ */
-.frame{
+.epoch{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.8em;
+  text-transform:uppercase;color:var(--ink-dim);padding-left:.8em;
+  margin-bottom:30px;
+}
+h1.title-zh{
+  font-family:'Noto Serif SC',serif;font-weight:200;
+  font-size:clamp(46px,8vw,84px);letter-spacing:.4em;padding-left:.4em;
+  color:var(--ink);line-height:1.3;
+}
+h1 .accent{color:var(--gold-hi)}
+.title-ru{
+  font-family:'Cinzel',serif;font-size:clamp(12px,1.8vw,16px);
+  letter-spacing:.7em;padding-left:.7em;text-transform:uppercase;
+  color:var(--ink-dim);margin-top:26px;
+}
+
+.date-rule{
+  display:flex;align-items:center;gap:26px;margin-top:56px;
+  font-family:'Cinzel',serif;font-size:14px;letter-spacing:.35em;color:var(--gold);
+}
+.date-rule .bar{width:90px;height:1px;background:var(--line)}
+.date-rule .diamond{
+  width:7px;height:7px;border:1px solid var(--gold);transform:rotate(45deg);
+}
+
+.age-figure{margin-top:64px}
+.age-figure .num{
+  font-family:'Cinzel',serif;font-weight:400;
+  font-size:clamp(54px,7vw,84px);color:var(--gold-hi);line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.age-figure .cap{
+  font-size:11px;font-family:'Cinzel',serif;letter-spacing:.6em;padding-left:.6em;
+  text-transform:uppercase;color:var(--ink-faint);margin-top:14px;
+}
+
+.descend{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--ink-faint);font-size:10px;font-family:'Cinzel',serif;
+  letter-spacing:.5em;padding-left:.5em;text-transform:uppercase;
+}
+.descend .stem{width:1px;height:52px;background:linear-gradient(var(--gold),transparent);
+  animation:stemPulse 3.5s ease-in-out infinite}
+@keyframes stemPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ════════════════════════════════════════════════════════════
+   НАВИГАЦИЯ — строгая строка оглавления
+════════════════════════════════════════════════════════════ */
+nav.contents{
+  position:sticky;top:0;z-index:60;
+  background:rgba(18,11,6,.94);backdrop-filter:blur(8px);
+  border-top:var(--hairline);border-bottom:var(--hairline);
+}
+.contents-inner{
+  max-width:920px;margin:0 auto;display:flex;justify-content:center;
+}
+.toc-link{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--ink-dim);
+  padding:20px 26px;cursor:pointer;background:none;border:none;
+  border-left:var(--hairline);position:relative;transition:color .5s;
+}
+.toc-link:last-child{border-right:var(--hairline)}
+.toc-link .num{display:block;font-size:9px;color:var(--ink-faint);margin-bottom:4px;letter-spacing:.2em;transition:color .5s}
+.toc-link::after{
+  content:'';position:absolute;left:50%;bottom:0;height:1px;width:0;
+  background:var(--gold);transition:width .5s ease, left .5s ease;
+}
+.toc-link:hover{color:var(--ink)}
+.toc-link.active{color:var(--gold-hi)}
+.toc-link.active .num{color:var(--gold)}
+.toc-link.active::after{width:100%;left:0}
+@media(max-width:720px){
+  .toc-link{padding:14px 12px;font-size:9px;letter-spacing:.15em}
+  .toc-link .num{display:none}
+}
+
+/* ════════════════════════════════════════════════════════════
+   ГЛАВЫ
+════════════════════════════════════════════════════════════ */
+section.chapter{display:none;padding:100px 0 60px}
+section.chapter.shown{display:block;animation:chapterIn 1.1s cubic-bezier(.2,.7,.2,1)}
+@keyframes chapterIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.chapter-head{text-align:center;margin-bottom:80px;position:relative}
+.chapter-head .ordinal{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.7em;padding-left:.7em;
+  text-transform:uppercase;color:var(--ink-faint);
+}
+.chapter-head .zh-t{
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:52px;
+  letter-spacing:.45em;padding-left:.45em;color:var(--ink);margin:18px 0 14px;
+}
+.chapter-head .ru-t{
+  font-family:'Cinzel',serif;font-size:13px;letter-spacing:.55em;padding-left:.55em;
+  text-transform:uppercase;color:var(--gold);
+}
+.chapter-head .under{
+  width:1px;height:44px;background:var(--line);margin:34px auto 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ПЛИТА — основной блок содержимого
+════════════════════════════════════════════════════════════ */
+.slab{
+  position:relative;background:var(--ground);
+  border:var(--hairline);
+  padding:56px 58px;margin-bottom:56px;
+}
+/* двойная рама с зазором — как паспарту */
+.slab::before{
+  content:'';position:absolute;inset:8px;border:1px solid rgba(168,134,61,.13);
+  pointer-events:none;
+}
+/* геометрические углы: маленький квадрат-врезка */
+.slab .tick{
+  position:absolute;width:9px;height:9px;background:var(--void);
+  border:1px solid var(--gold);z-index:2;
+}
+.slab .tick.tl{top:-5px;left:-5px}
+.slab .tick.tr{top:-5px;right:-5px}
+.slab .tick.bl{bottom:-5px;left:-5px}
+.slab .tick.br{bottom:-5px;right:-5px}
+@media(max-width:640px){.slab{padding:38px 24px}}
+
+.slab-label{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--void);padding:0 22px;
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.5em;padding-left:calc(22px + .5em);
+  text-transform:uppercase;color:var(--gold);white-space:nowrap;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ДОСЬЕ
+════════════════════════════════════════════════════════════ */
+.register{display:grid;grid-template-columns:280px 1fr;gap:56px;align-items:start}
+@media(max-width:760px){.register{grid-template-columns:1fr}}
+
+.effigy{
+  position:relative;aspect-ratio:3/4;border:var(--hairline);
+  background:linear-gradient(170deg,#241708,var(--void));
+  display:flex;align-items:center;justify-content:center;
+}
+.effigy::before{content:'';position:absolute;inset:10px;border:1px solid rgba(168,134,61,.15)}
+.effigy .mark{
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:88px;
+  color:rgba(168,134,61,.14);user-select:none;
+}
+.effigy .cap{
+  position:absolute;bottom:22px;left:0;right:0;text-align:center;
+  font-style:italic;font-size:14px;color:var(--ink-faint);letter-spacing:.15em;
+}
+.effigy .seal{
+  position:absolute;top:18px;right:18px;width:36px;height:36px;
+  border:1px solid var(--cinnabar);color:var(--cinnabar);
+  font-family:'Noto Serif SC',serif;font-size:16px;
+  display:flex;align-items:center;justify-content:center;opacity:.75;
+}
+
+/* реестр строк — как гроссбух */
+.ledger{list-style:none;counter-reset:row}
+.ledger li{
+  display:grid;grid-template-columns:34px 180px 1fr;gap:14px;align-items:baseline;
+  padding:13px 2px;border-bottom:1px solid rgba(61,42,22,.55);
+  transition:background .5s;
+}
+.ledger li:hover{background:rgba(168,134,61,.035)}
+.ledger li::before{
+  counter-increment:row;content:counter(row,decimal-leading-zero);
+  font-family:'Cinzel',serif;font-size:10px;color:var(--ink-faint);letter-spacing:.1em;
+}
+.ledger .k{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--gold);
+}
+.ledger .k .zh{color:var(--ink-faint);margin-right:10px;font-size:12px;letter-spacing:0}
+.ledger .v{font-style:italic;color:var(--ink)}
+@media(max-width:600px){
+  .ledger li{grid-template-columns:28px 1fr;grid-template-rows:auto auto}
+  .ledger .v{grid-column:2}
+}
+
+.passage{font-style:italic;color:var(--ink-dim);margin-top:34px}
+.passage::first-letter{
+  font-style:normal;font-family:'Cinzel',serif;font-size:2.2em;
+  color:var(--gold-hi);line-height:1;padding-right:8px;float:left;margin-top:4px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ХРОНИКА — двусторонняя ось
+════════════════════════════════════════════════════════════ */
+.chronicle{position:relative;padding:20px 0}
+.chronicle::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:var(--line);
+}
+.epoch-row{
+  display:grid;grid-template-columns:1fr 90px 1fr;align-items:center;
+  margin-bottom:64px;opacity:0;transform:translateY(26px);
+  transition:opacity 1.1s ease, transform 1.1s ease;
+}
+.epoch-row.seen{opacity:1;transform:none}
+.epoch-row .node{
+  justify-self:center;width:11px;height:11px;transform:rotate(45deg);
+  border:1px solid var(--gold);background:var(--void);transition:background .6s;
+}
+.epoch-row:hover .node{background:var(--gold)}
+.epoch-row .cell{padding:0 10px}
+.epoch-row .cell.year{text-align:right}
+.epoch-row:nth-child(even) .cell.year{text-align:left;order:3}
+.epoch-row:nth-child(even) .cell.text{order:1;text-align:right}
+.epoch-row .y{
+  font-family:'Cinzel',serif;font-size:26px;color:var(--gold-hi);letter-spacing:.1em;
+}
+.epoch-row .y .zh{display:block;font-size:12px;color:var(--ink-faint);letter-spacing:.4em;margin-top:4px;font-weight:200}
+.epoch-row .t{font-style:italic;color:var(--ink-dim);font-size:16px}
+@media(max-width:640px){
+  .chronicle::before{left:14px}
+  .epoch-row{grid-template-columns:30px 1fr;gap:6px}
+  .epoch-row .node{justify-self:start;margin-left:9px}
+  .epoch-row .cell.year,.epoch-row:nth-child(even) .cell.year{text-align:left;order:0;grid-column:2}
+  .epoch-row .cell.text,.epoch-row:nth-child(even) .cell.text{order:0;text-align:left;grid-column:2}
+  .epoch-row .node{grid-row:1}
+}
+
+/* ════════════════════════════════════════════════════════════
+   ПРИРОДА — регистры-складни
+════════════════════════════════════════════════════════════ */
+.fold{border:var(--hairline);border-bottom:none;background:var(--ground)}
+.fold:last-of-type{border-bottom:var(--hairline)}
+.fold-head{
+  display:grid;grid-template-columns:70px 1fr auto;align-items:center;
+  cursor:pointer;user-select:none;min-height:76px;
+}
+.fold-head .idx{
+  height:100%;display:flex;align-items:center;justify-content:center;
+  border-right:var(--hairline);
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:22px;
+  color:var(--ink-faint);transition:color .5s, background .5s;
+}
+.fold-head .name{
+  padding:0 30px;font-family:'Cinzel',serif;font-size:13px;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--ink);
+  transition:color .5s;
+}
+.fold-head .ind{
+  padding:0 30px;color:var(--ink-faint);font-size:18px;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1), color .5s;
+}
+.fold.open .fold-head .idx{color:var(--gold-hi);background:rgba(168,134,61,.05)}
+.fold.open .fold-head .name{color:var(--gold-hi)}
+.fold.open .fold-head .ind{transform:rotate(45deg);color:var(--gold)}
+.fold-body{max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.2,.8,.2,1)}
+.fold-body-inner{
+  padding:8px 30px 36px 100px;font-style:italic;color:var(--ink-dim);
   position:relative;
-  background:linear-gradient(160deg,var(--bg-panel),var(--bg-dark));
-  border:1px solid var(--brown-warm);
-  padding:38px 34px;margin-bottom:34px;
-  transition:.5s;
 }
-.frame::before,.frame::after,
-.frame .c3,.frame .c4{
-  content:'';position:absolute;width:22px;height:22px;
-  border-color:var(--gold);border-style:solid;transition:.5s;
+.fold-body-inner::before{
+  content:'';position:absolute;left:70px;top:0;bottom:26px;width:1px;background:var(--line-dim);
 }
-.frame::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
-.frame::after{top:-1px;right:-1px;border-width:2px 2px 0 0}
-.frame .c3{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
-.frame .c4{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
-.frame:hover{border-color:var(--brown-light);box-shadow:0 8px 45px rgba(0,0,0,.5),0 0 30px rgba(201,162,39,.08)}
-.frame:hover::before,.frame:hover::after,
-.frame:hover .c3,.frame:hover .c4{width:36px;height:36px}
-
-.frame-mark{
-  position:absolute;top:12px;right:16px;
-  font-family:'Noto Serif SC',serif;font-size:15px;color:var(--brown-light);
-  opacity:.6;letter-spacing:.2em;
+@media(max-width:600px){
+  .fold-body-inner{padding-left:30px}
+  .fold-body-inner::before{display:none}
 }
 
-/* ============================================================
-   ПОРТРЕТ + ДОСЬЕ
-============================================================ */
-.dossier{display:grid;grid-template-columns:300px 1fr;gap:34px;align-items:start}
-@media(max-width:760px){.dossier{grid-template-columns:1fr}}
-.portrait{
-  position:relative;aspect-ratio:3/4;
-  background:
-    radial-gradient(circle at 50% 35%, rgba(201,162,39,.12), transparent 60%),
-    linear-gradient(160deg,var(--bg-panel-2),var(--bg-dark));
-  border:1px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
+/* ════════════════════════════════════════════════════════════
+   СИЛЫ
+════════════════════════════════════════════════════════════ */
+.gauge{margin-bottom:34px}
+.gauge-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.gauge-top .n{
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--ink);
 }
-.portrait::before{
-  content:'畫';position:absolute;
-  font-family:'Noto Serif SC',serif;font-size:120px;
-  color:rgba(201,162,39,.12);
+.gauge-top .n .zh{color:var(--ink-faint);margin-right:12px;font-size:13px;letter-spacing:0}
+.gauge-top .roman{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:.2em}
+/* шкала из десяти сегментов — дискретная, а не «полоска» */
+.gauge-track{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.gauge-seg{
+  height:6px;background:rgba(61,42,22,.5);border:1px solid rgba(61,42,22,.8);
+  transition:background .5s ease, border-color .5s ease, box-shadow .5s ease;
 }
-.portrait .placeholder-label{
-  position:relative;z-index:2;font-style:italic;color:var(--ink-dim);letter-spacing:.15em;
-}
-.portrait .gleam{
-  position:absolute;top:0;left:-80%;width:60%;height:100%;
-  background:linear-gradient(100deg,transparent,rgba(232,200,96,.1),transparent);
-  animation:gleam 6s ease-in-out infinite;
-}
-@keyframes gleam{0%{left:-80%}45%,100%{left:130%}}
-.portrait-seal{
-  position:absolute;bottom:12px;right:12px;z-index:3;
-  width:44px;height:44px;border:2px solid var(--seal-red);border-radius:4px;
-  color:var(--seal-red);font-family:'Noto Serif SC',serif;font-size:20px;
-  display:flex;align-items:center;justify-content:center;
-  transform:rotate(-5deg);opacity:.85;
+.gauge-seg.lit{
+  background:var(--gold);border-color:var(--gold);
+  box-shadow:0 0 6px rgba(168,134,61,.35);
 }
 
-.info-list{list-style:none}
-.info-list li{
-  display:flex;justify-content:space-between;gap:20px;
-  padding:11px 4px;border-bottom:1px dashed rgba(138,90,43,.4);
-  transition:.3s;
-}
-.info-list li:hover{background:rgba(201,162,39,.05);padding-left:12px}
-.info-list .k{
-  color:var(--gold);letter-spacing:.08em;white-space:nowrap;
-  display:flex;align-items:center;gap:10px;
-}
-.info-list .k .zh{font-size:13px;color:var(--brown-light)}
-.info-list .v{color:var(--ink);font-style:italic;text-align:right}
+.columns-2{display:grid;grid-template-columns:1fr 1fr;gap:0 64px}
+@media(max-width:700px){.columns-2{grid-template-columns:1fr}}
 
-/* ============================================================
-   ХРОНОЛОГИЯ
-============================================================ */
-.timeline{position:relative;padding-left:44px}
-.timeline::before{
-  content:'';position:absolute;left:11px;top:6px;bottom:6px;width:2px;
-  background:linear-gradient(var(--brown-warm),var(--gold),var(--brown-warm));
+/* дары — строгие таблички */
+.edicts{display:grid;grid-template-columns:1fr 1fr;border:var(--hairline)}
+.edict{
+  padding:44px 38px;position:relative;
+  border-right:var(--hairline);border-bottom:var(--hairline);
+  transition:background .6s;
 }
-.t-item{position:relative;margin-bottom:38px;opacity:0;transform:translateX(30px);transition:.8s ease}
-.t-item.revealed{opacity:1;transform:none}
-.t-item::before{
-  content:'';position:absolute;left:-40px;top:8px;
-  width:12px;height:12px;background:var(--bg-deep);
-  border:2px solid var(--gold);transform:rotate(45deg);
-  transition:.4s;
+.edict:nth-child(2n){border-right:none}
+.edict:nth-last-child(-n+2){border-bottom:none}
+.edict:hover{background:rgba(168,134,61,.04)}
+.edict .glyph-col{
+  position:absolute;top:38px;right:30px;
+  writing-mode:vertical-rl;
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:15px;
+  letter-spacing:.5em;color:var(--ink-faint);opacity:.7;
 }
-.t-item:hover::before{background:var(--gold);box-shadow:0 0 14px var(--shadow-gold)}
-.t-year{
-  font-family:'Cinzel',serif;color:var(--gold-bright);font-size:22px;
-  display:flex;align-items:baseline;gap:14px;
+.edict .no{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;
+  color:var(--ink-faint);text-transform:uppercase;margin-bottom:16px;
 }
-.t-year .zh{font-size:14px;color:var(--brown-light)}
-.t-text{color:var(--ink-dim);margin-top:6px;font-style:italic}
+.edict h3{
+  font-family:'Cormorant',serif;font-weight:500;font-size:24px;
+  color:var(--gold-hi);letter-spacing:.06em;margin-bottom:12px;
+}
+.edict p{font-style:italic;font-size:16px;color:var(--ink-dim);max-width:88%}
+@media(max-width:640px){
+  .edicts{grid-template-columns:1fr}
+  .edict{border-right:none}
+  .edict:nth-last-child(-n+2){border-bottom:var(--hairline)}
+  .edict:last-child{border-bottom:none}
+}
 
-/* ============================================================
-   АККОРДЕОН
-============================================================ */
-.acc-item{border:1px solid var(--brown-warm);margin-bottom:14px;background:rgba(46,28,14,.6);transition:.4s}
-.acc-item.open{border-color:var(--gold);box-shadow:0 0 25px rgba(201,162,39,.08)}
-.acc-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 24px;cursor:pointer;user-select:none;
-}
-.acc-head .t{display:flex;align-items:center;gap:16px;font-size:20px;color:var(--ink);letter-spacing:.06em}
-.acc-head .t .zh{color:var(--gold);font-size:16px}
-.acc-head .arrow{
-  color:var(--gold);transition:.45s;font-size:14px;
-}
-.acc-item.open .arrow{transform:rotate(90deg)}
-.acc-body{
-  max-height:0;overflow:hidden;transition:max-height .6s ease;
-}
-.acc-body-inner{padding:0 24px 22px;color:var(--ink-dim);font-style:italic;border-top:1px dashed rgba(138,90,43,.4)}
-.acc-body-inner p{padding-top:16px}
-
-/* ============================================================
-   СПОСОБНОСТИ — ШКАЛЫ
-============================================================ */
-.stat{margin-bottom:26px}
-.stat-head{display:flex;justify-content:space-between;margin-bottom:8px}
-.stat-head .n{letter-spacing:.1em;display:flex;gap:12px;align-items:baseline}
-.stat-head .n .zh{color:var(--brown-light);font-size:13px}
-.stat-head .val{color:var(--gold);font-family:'Cinzel',serif;font-size:15px}
-.stat-bar{
-  height:10px;background:var(--bg-dark);border:1px solid var(--brown-warm);
-  position:relative;overflow:hidden;
-}
-.stat-fill{
-  height:100%;width:0;
-  background:linear-gradient(90deg,var(--brown-light),var(--gold),var(--gold-bright));
-  transition:width 1.6s cubic-bezier(.25,1,.3,1);
-  position:relative;
-}
-.stat-fill::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
-  background-size:200% 100%;
-  animation:barGleam 3s linear infinite;
-}
-@keyframes barGleam{to{background-position:-200% 0}}
-
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-@media(max-width:700px){.grid-2{grid-template-columns:1fr}}
-
-/* Карточки-таланты */
-.gift-card{
-  text-align:center;padding:30px 20px;
-  border:1px solid var(--brown-warm);
-  background:linear-gradient(180deg,rgba(58,36,18,.5),rgba(36,20,7,.7));
-  transition:.45s;position:relative;overflow:hidden;
-}
-.gift-card::before{
-  content:attr(data-zh);position:absolute;top:-18px;right:-8px;
-  font-family:'Noto Serif SC',serif;font-size:90px;color:rgba(201,162,39,.06);
-  transition:.45s;pointer-events:none;
-}
-.gift-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 14px 40px rgba(0,0,0,.45)}
-.gift-card:hover::before{color:rgba(201,162,39,.14);transform:rotate(8deg)}
-.gift-icon{
-  width:58px;height:58px;margin:0 auto 16px;border-radius:50%;
-  border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;
-  font-family:'Noto Serif SC',serif;font-size:24px;color:var(--gold-bright);
-  background:radial-gradient(circle at 35% 30%, rgba(201,162,39,.2), transparent);
-}
-.gift-name{font-size:21px;color:var(--gold-pale);letter-spacing:.08em;margin-bottom:8px}
-.gift-desc{font-style:italic;color:var(--ink-dim);font-size:16px}
-
-/* ============================================================
+/* ════════════════════════════════════════════════════════════
    СВЯЗИ
-============================================================ */
-.bond{
-  display:flex;gap:22px;align-items:center;
-  padding:20px;border:1px solid var(--brown-warm);margin-bottom:16px;
-  background:rgba(46,28,14,.5);transition:.4s;
+════════════════════════════════════════════════════════════ */
+.kin{
+  display:grid;grid-template-columns:110px 1fr;border:var(--hairline);
+  margin-bottom:22px;background:var(--ground);transition:border-color .6s;
 }
-.bond:hover{border-color:var(--gold);transform:translateX(8px)}
-.bond-avatar{
-  flex-shrink:0;width:64px;height:64px;border-radius:50%;
-  border:2px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Noto Serif SC',serif;font-size:22px;color:var(--gold);
-  background:radial-gradient(circle at 35% 30%, var(--brown-warm), var(--bg-dark));
+.kin:hover{border-color:var(--bronze)}
+.kin-sigil{
+  border-right:var(--hairline);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;padding:28px 0;
 }
-.bond-name{font-size:21px;color:var(--gold-pale)}
-.bond-role{font-size:14px;letter-spacing:.25em;text-transform:uppercase;color:var(--brown-light)}
-.bond-desc{font-style:italic;color:var(--ink-dim);font-size:16px;margin-top:4px}
+.kin-sigil .g{
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:30px;color:var(--gold);
+}
+.kin-sigil .r{
+  font-family:'Cinzel',serif;font-size:8px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--ink-faint);
+}
+.kin-body{padding:26px 34px}
+.kin-body .who{
+  font-family:'Cormorant',serif;font-weight:500;font-size:23px;color:var(--ink);
+}
+.kin-body .status{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--gold);margin:4px 0 10px;
+}
+.kin-body .note{font-style:italic;color:var(--ink-dim);font-size:16px}
 
-/* ============================================================
-   ЦИТАТА
-============================================================ */
-.quote{
-  text-align:center;font-size:24px;font-style:italic;color:var(--gold-pale);
-  max-width:640px;margin:60px auto;position:relative;padding:30px 40px;
+/* ════════════════════════════════════════════════════════════
+   ИЗРЕЧЕНИЕ
+════════════════════════════════════════════════════════════ */
+.utterance{
+  margin:90px auto;max-width:620px;text-align:center;position:relative;
+  padding:54px 30px;
 }
-.quote::before,.quote::after{
-  font-family:'Noto Serif SC',serif;position:absolute;font-size:52px;
-  color:var(--brown-light);opacity:.7;
+.utterance::before,.utterance::after{
+  content:'';position:absolute;left:50%;transform:translateX(-50%);
+  width:1px;height:36px;background:var(--line);
 }
-.quote::before{content:'「';top:-10px;left:0}
-.quote::after{content:'」';bottom:-10px;right:0}
-.quote .author{display:block;margin-top:14px;font-size:15px;letter-spacing:.3em;color:var(--ink-dim);font-style:normal}
+.utterance::before{top:0}
+.utterance::after{bottom:0}
+.utterance .words{
+  font-size:25px;font-style:italic;color:var(--ink);line-height:1.7;
+}
+.utterance .attrib{
+  margin-top:26px;font-family:'Cinzel',serif;font-size:10px;
+  letter-spacing:.5em;padding-left:.5em;text-transform:uppercase;color:var(--ink-faint);
+}
 
-/* ============================================================
-   ПОДВАЛ
-============================================================ */
+/* ════════════════════════════════════════════════════════════
+   ЗАВЕРШЕНИЕ
+════════════════════════════════════════════════════════════ */
 footer{
-  text-align:center;padding:70px 20px 50px;position:relative;z-index:3;
-  border-top:1px solid var(--brown-warm);margin-top:60px;
-  background:linear-gradient(rgba(36,20,7,.4),var(--bg-deep));
+  position:relative;z-index:2;text-align:center;
+  padding:110px 20px 80px;margin-top:40px;
 }
-footer .zh-footer{
-  font-family:'Noto Serif SC',serif;font-size:26px;color:var(--gold);
-  letter-spacing:.6em;margin-bottom:14px;opacity:.8;
+footer .colophon-zh{
+  font-family:'Noto Serif SC',serif;font-weight:200;font-size:22px;
+  letter-spacing:1em;padding-left:1em;color:var(--ink-dim);margin:38px 0 16px;
 }
-footer .small{font-size:13px;letter-spacing:.35em;text-transform:uppercase;color:var(--ink-dim)}
+footer .colophon-ru{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.6em;padding-left:.6em;
+  text-transform:uppercase;color:var(--ink-faint);
+}
+footer .end-seal{
+  width:52px;height:52px;margin:0 auto;border:1px solid var(--cinnabar);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif SC',serif;font-size:22px;color:var(--cinnabar);
+  transform:rotate(-3deg);opacity:.8;
+}
 
-/* reveal-анимация общая */
-.reveal{opacity:0;transform:translateY(30px);transition:.9s ease}
-.reveal.revealed{opacity:1;transform:none}
+/* появление при скролле */
+.rise{opacity:0;transform:translateY(34px);transition:opacity 1.2s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.rise.seen{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<!-- ЗАГРУЗКА -->
-<div id="loader">
-  <div class="seal-stamp zh">血</div>
-  <div class="loader-text">анкета открывается</div>
+<!-- ВХОД -->
+<div id="veil">
+  <div class="veil-line"></div>
+  <div class="veil-char zh">卷</div>
+  <div class="veil-caption">свиток разворачивается</div>
 </div>
 
-<!-- ФОН -->
-<canvas id="emberCanvas"></canvas>
-<div class="bg-dragon zh">龍</div>
+<canvas id="dust"></canvas>
+<div class="axis"></div>
 
-<!-- КОЛОННЫ -->
-<div class="pillar left">
-  <span>永</span><span>夜</span><span>之</span><span>主</span><span>不</span><span>朽</span>
-</div>
-<div class="pillar right">
-  <span>血</span><span>月</span><span>當</span><span>空</span><span>長</span><span>生</span>
-</div>
+<div class="sheet">
 
-<div class="scroll-wrap">
+  <!-- ═══ ФРОНТИСПИС ═══ -->
+  <header class="frontis">
+    <div class="frontis-side l zh">永夜之主 · 不朽者</div>
+    <div class="frontis-side r zh">血月當空 · 三百年</div>
 
-  <!-- ШАПКА -->
-  <header>
-    <div class="tassel-row">
-      <div class="tassel"><div class="cord"></div><div class="bead">夜</div><div class="threads"></div></div>
-      <div class="tassel"><div class="cord"></div><div class="bead">血</div><div class="threads"></div></div>
-      <div class="tassel"><div class="cord"></div><div class="bead">月</div><div class="threads"></div></div>
+    <div class="crest">
+      <div class="ring slow"></div>
+      <div class="ring inner"></div>
+      <div class="glyph zh">血</div>
     </div>
 
-    <h1 class="header-zh">血月之卷</h1>
-    <div class="header-sub">Свиток Кровавой Луны · Анкета</div>
+    <div class="epoch">Anno Domini MDCCCLII</div>
 
-    <div class="header-dates">
-      <span>Рождён · 1547</span>
-      <span class="dot"></span>
-      <span>Ныне · 1852</span>
+    <h1 class="title-zh zh">血<span class="accent">月</span>之卷</h1>
+    <div class="title-ru">Свиток Кровавой Луны</div>
+
+    <div class="date-rule">
+      <span>1547</span>
+      <span class="bar"></span>
+      <span class="diamond"></span>
+      <span class="bar"></span>
+      <span>1852</span>
     </div>
 
-    <div class="divider">
-      <div class="line"></div>
-      <div class="orn">❖</div>
-      <div class="zh" style="color:var(--gold)">壽</div>
-      <div class="orn">❖</div>
-      <div class="line"></div>
+    <div class="age-figure">
+      <div class="num" id="ageNum">0</div>
+      <div class="cap">лет во тьме</div>
     </div>
 
-    <div class="age-block">
-      <div class="age-num" id="ageCounter">0</div>
-      <div class="age-label">лет во тьме</div>
+    <div class="descend">
+      <div class="stem"></div>
+      <span>ниже</span>
     </div>
   </header>
 
-  <!-- НАВИГАЦИЯ -->
-  <nav class="tabs">
-    <button class="tab-btn active" data-tab="tab-dossier">Досье<span class="zh">卷宗</span></button>
-    <button class="tab-btn" data-tab="tab-history">История<span class="zh">歷史</span></button>
-    <button class="tab-btn" data-tab="tab-nature">Природа<span class="zh">本性</span></button>
-    <button class="tab-btn" data-tab="tab-powers">Силы<span class="zh">力量</span></button>
-    <button class="tab-btn" data-tab="tab-bonds">Связи<span class="zh">緣分</span></button>
-  </nav>
+  <div class="meander"></div>
 
-  <!-- ═══════════ ДОСЬЕ ═══════════ -->
-  <section class="panel active" id="tab-dossier">
-    <div class="section-title">
-      <span class="zh-big">卷宗</span>
-      <span class="ru">Досье</span>
+</div>
+
+<!-- ═══ ОГЛАВЛЕНИЕ ═══ -->
+<nav class="contents">
+  <div class="contents-inner">
+    <button class="toc-link active" data-ch="ch-1"><span class="num">I · 卷宗</span>Досье</button>
+    <button class="toc-link" data-ch="ch-2"><span class="num">II · 歷史</span>Хроника</button>
+    <button class="toc-link" data-ch="ch-3"><span class="num">III · 本性</span>Природа</button>
+    <button class="toc-link" data-ch="ch-4"><span class="num">IV · 力量</span>Силы</button>
+    <button class="toc-link" data-ch="ch-5"><span class="num">V · 緣分</span>Узы</button>
+  </div>
+</nav>
+
+<div class="sheet">
+
+  <!-- ═══════════ I. ДОСЬЕ ═══════════ -->
+  <section class="chapter shown" id="ch-1">
+    <div class="chapter-head">
+      <div class="ordinal">Глава первая</div>
+      <div class="zh-t zh">卷宗</div>
+      <div class="ru-t">Досье</div>
+      <div class="under"></div>
     </div>
 
-    <div class="frame reveal">
-      <span class="c3"></span><span class="c4"></span>
-      <span class="frame-mark zh">其一</span>
-      <div class="dossier">
-        <div class="portrait">
-          <div class="gleam"></div>
-          <span class="placeholder-label">заглушка-портрет</span>
-          <div class="portrait-seal zh">印</div>
+    <div class="slab rise">
+      <span class="tick tl"></span><span class="tick tr"></span>
+      <span class="tick bl"></span><span class="tick br"></span>
+      <div class="slab-label">Реестр · 名冊</div>
+
+      <div class="register">
+        <div class="effigy">
+          <span class="mark zh">像</span>
+          <span class="cap">заглушка-портрет</span>
+          <span class="seal zh">印</span>
         </div>
-        <ul class="info-list">
+        <ul class="ledger">
           <li><span class="k"><span class="zh">名</span>Имя</span><span class="v">заглушка1</span></li>
-          <li><span class="k"><span class="zh">號</span>Прозвища</span><span class="v">заглушка2</span></li>
-          <li><span class="k"><span class="zh">生</span>Дата рождения</span><span class="v">1547 год · заглушка3</span></li>
+          <li><span class="k"><span class="zh">號</span>Именования</span><span class="v">заглушка2</span></li>
+          <li><span class="k"><span class="zh">生</span>Рождение</span><span class="v">1547 · заглушка3</span></li>
           <li><span class="k"><span class="zh">歲</span>Возраст</span><span class="v">305 лет</span></li>
           <li><span class="k"><span class="zh">貌</span>Видимый возраст</span><span class="v">заглушка4</span></li>
-          <li><span class="k"><span class="zh">族</span>Раса</span><span class="v">Вампир</span></li>
+          <li><span class="k"><span class="zh">族</span>Природа</span><span class="v">вампир</span></li>
           <li><span class="k"><span class="zh">地</span>Место рождения</span><span class="v">заглушка5</span></li>
-          <li><span class="k"><span class="zh">職</span>Род занятий</span><span class="v">заглушка6</span></li>
+          <li><span class="k"><span class="zh">職</span>Положение</span><span class="v">заглушка6</span></li>
           <li><span class="k"><span class="zh">居</span>Резиденция</span><span class="v">заглушка7</span></li>
         </ul>
       </div>
     </div>
 
-    <div class="frame reveal">
-      <span class="c3"></span><span class="c4"></span>
-      <span class="frame-mark zh">外貌</span>
-      <div class="section-title" style="margin-bottom:24px">
-        <span class="zh-big" style="font-size:30px">外貌</span>
-        <span class="ru">Внешность</span>
-      </div>
-      <div class="grid-2">
-        <ul class="info-list">
+    <div class="slab rise">
+      <span class="tick tl"></span><span class="tick tr"></span>
+      <span class="tick bl"></span><span class="tick br"></span>
+      <div class="slab-label">Облик · 外貌</div>
+
+      <div class="columns-2">
+        <ul class="ledger">
           <li><span class="k"><span class="zh">高</span>Рост</span><span class="v">заглушка8</span></li>
-          <li><span class="k"><span class="zh">體</span>Телосложение</span><span class="v">заглушка9</span></li>
+          <li><span class="k"><span class="zh">體</span>Сложение</span><span class="v">заглушка9</span></li>
           <li><span class="k"><span class="zh">髮</span>Волосы</span><span class="v">заглушка10</span></li>
         </ul>
-        <ul class="info-list">
+        <ul class="ledger">
           <li><span class="k"><span class="zh">目</span>Глаза</span><span class="v">заглушка11</span></li>
-          <li><span class="k"><span class="zh">記</span>Особые приметы</span><span class="v">заглушка12</span></li>
-          <li><span class="k"><span class="zh">衣</span>Стиль одежды</span><span class="v">заглушка13</span></li>
+          <li><span class="k"><span class="zh">記</span>Приметы</span><span class="v">заглушка12</span></li>
+          <li><span class="k"><span class="zh">衣</span>Одеяние</span><span class="v">заглушка13</span></li>
         </ul>
       </div>
-      <p style="margin-top:22px;font-style:italic;color:var(--ink-dim)">заглушка14 — развёрнутое описание внешности.</p>
+
+      <p class="passage">заглушка14 — развёрнутое описание внешности, начинающееся с буквицы и продолжающееся так, как того требует достоинство документа.</p>
     </div>
 
-    <div class="quote reveal">
-      заглушка15 — цитата персонажа.
-      <span class="author zh">— 血月 · 1852</span>
-    </div>
-  </section>
-
-  <!-- ═══════════ ИСТОРИЯ ═══════════ -->
-  <section class="panel" id="tab-history">
-    <div class="section-title">
-      <span class="zh-big">歷史</span>
-      <span class="ru">Три столетия пути</span>
-    </div>
-
-    <div class="frame reveal">
-      <span class="c3"></span><span class="c4"></span>
-      <span class="frame-mark zh">年表</span>
-      <div class="timeline">
-        <div class="t-item">
-          <div class="t-year">1547 <span class="zh">誕生</span></div>
-          <div class="t-text">заглушка16 — рождение.</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">заглушка17 <span class="zh">轉化</span></div>
-          <div class="t-text">заглушка18 — обращение.</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">заглушка19 <span class="zh">流浪</span></div>
-          <div class="t-text">заглушка20 — годы скитаний.</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">заглушка21 <span class="zh">崛起</span></div>
-          <div class="t-text">заглушка22 — возвышение.</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">заглушка23 <span class="zh">變故</span></div>
-          <div class="t-text">заглушка24 — переломное событие.</div>
-        </div>
-        <div class="t-item">
-          <div class="t-year">1852 <span class="zh">當下</span></div>
-          <div class="t-text">заглушка25 — настоящее время.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="frame reveal">
-      <span class="c3"></span><span class="c4"></span>
-      <span class="frame-mark zh">傳記</span>
-      <div class="section-title" style="margin-bottom:24px">
-        <span class="zh-big" style="font-size:30px">傳記</span>
-        <span class="ru">Биография</span>
-      </div>
-      <p style="font-style:italic;color:var(--ink-dim)">заглушка26 — полный биографический текст.</p>
+    <div class="utterance rise">
+      <div class="words">заглушка15 — изречение персонажа.</div>
+      <div class="attrib">записано · 1852</div>
     </div>
   </section>
 
-  <!-- ═══════════ ПРИРОДА ═══════════ -->
-  <section class="panel" id="tab-nature">
-    <div class="section-title">
-      <span class="zh-big">本性</span>
-      <span class="ru">Характер и природа</span>
+  <!-- ═══════════ II. ХРОНИКА ═══════════ -->
+  <section class="chapter" id="ch-2">
+    <div class="chapter-head">
+      <div class="ordinal">Глава вторая</div>
+      <div class="zh-t zh">歷史</div>
+      <div class="ru-t">Хроника трёх столетий</div>
+      <div class="under"></div>
     </div>
 
-    <div class="acc-item">
-      <div class="acc-head">
-        <div class="t"><span class="zh">性</span>Характер</div>
-        <div class="arrow">❯</div>
+    <div class="chronicle">
+      <div class="epoch-row">
+        <div class="cell year"><div class="y">1547<span class="zh">誕生</span></div></div>
+        <div class="node"></div>
+        <div class="cell text"><div class="t">заглушка16 — рождение.</div></div>
       </div>
-      <div class="acc-body"><div class="acc-body-inner"><p>заглушка27</p></div></div>
+      <div class="epoch-row">
+        <div class="cell year"><div class="y">заглушка17<span class="zh">轉化</span></div></div>
+        <div class="node"></div>
+        <div class="cell text"><div class="t">заглушка18 — обращение.</div></div>
+      </div>
+      <div class="epoch-row">
+        <div class="cell year"><div class="y">заглушка19<span class="zh">流浪</span></div></div>
+        <div class="node"></div>
+        <div class="cell text"><div class="t">заглушка20 — годы скитаний.</div></div>
+      </div>
+      <div class="epoch-row">
+        <div class="cell year"><div class="y">заглушка21<span class="zh">崛起</span></div></div>
+        <div class="node"></div>
+        <div class="cell text"><div class="t">заглушка22 — возвышение.</div></div>
+      </div>
+      <div class="epoch-row">
+        <div class="cell year"><div class="y">заглушка23<span class="zh">變故</span></div></div>
+        <div class="node"></div>
+        <div class="cell text"><div class="t">заглушка24 — перелом.</div></div>
+      </div>
+      <div class="epoch-row">
+        <div class="cell year"><div class="y">1852<span class="zh">當下</span></div></div>
+        <div class="node"></div>
+        <div class="cell text"><div class="t">заглушка25 — настоящее.</div></div>
+      </div>
     </div>
 
-    <div class="acc-item">
-      <div class="acc-head">
-        <div class="t"><span class="zh">德</span>Достоинства</div>
-        <div class="arrow">❯</div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><p>заглушка28</p></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-head">
-        <div class="t"><span class="zh">罪</span>Пороки</div>
-        <div class="arrow">❯</div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><p>заглушка29</p></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-head">
-        <div class="t"><span class="zh">懼</span>Страхи</div>
-        <div class="arrow">❯</div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><p>заглушка30</p></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-head">
-        <div class="t"><span class="zh">願</span>Желания и цели</div>
-        <div class="arrow">❯</div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><p>заглушка31</p></div></div>
-    </div>
-
-    <div class="acc-item">
-      <div class="acc-head">
-        <div class="t"><span class="zh">習</span>Привычки и склонности</div>
-        <div class="arrow">❯</div>
-      </div>
-      <div class="acc-body"><div class="acc-body-inner"><p>заглушка32</p></div></div>
+    <div class="slab rise">
+      <span class="tick tl"></span><span class="tick tr"></span>
+      <span class="tick bl"></span><span class="tick br"></span>
+      <div class="slab-label">Жизнеописание · 傳記</div>
+      <p class="passage">заглушка26 — полный биографический текст, изложенный размеренно и без спешки, ибо у того, кто пережил три столетия, нет причин торопиться.</p>
     </div>
   </section>
 
-  <!-- ═══════════ СИЛЫ ═══════════ -->
-  <section class="panel" id="tab-powers">
-    <div class="section-title">
-      <span class="zh-big">力量</span>
-      <span class="ru">Силы и умения</span>
+  <!-- ═══════════ III. ПРИРОДА ═══════════ -->
+  <section class="chapter" id="ch-3">
+    <div class="chapter-head">
+      <div class="ordinal">Глава третья</div>
+      <div class="zh-t zh">本性</div>
+      <div class="ru-t">Природа и нрав</div>
+      <div class="under"></div>
     </div>
 
-    <div class="frame reveal">
-      <span class="c3"></span><span class="c4"></span>
-      <span class="frame-mark zh">量表</span>
-      <div class="grid-2">
-        <div>
-          <div class="stat">
-            <div class="stat-head"><span class="n"><span class="zh">力</span>Сила</span><span class="val">заглушка</span></div>
-            <div class="stat-bar"><div class="stat-fill" data-w="85"></div></div>
-          </div>
-          <div class="stat">
-            <div class="stat-head"><span class="n"><span class="zh">速</span>Скорость</span><span class="val">заглушка</span></div>
-            <div class="stat-bar"><div class="stat-fill" data-w="72"></div></div>
-          </div>
-          <div class="stat">
-            <div class="stat-head"><span class="n"><span class="zh">韌</span>Стойкость</span><span class="val">заглушка</span></div>
-            <div class="stat-bar"><div class="stat-fill" data-w="90"></div></div>
-          </div>
+    <div class="rise">
+      <div class="fold">
+        <div class="fold-head">
+          <div class="idx zh">性</div>
+          <div class="name">Нрав</div>
+          <div class="ind">＋</div>
         </div>
-        <div>
-          <div class="stat">
-            <div class="stat-head"><span class="n"><span class="zh">智</span>Разум</span><span class="val">заглушка</span></div>
-            <div class="stat-bar"><div class="stat-fill" data-w="95"></div></div>
-          </div>
-          <div class="stat">
-            <div class="stat-head"><span class="n"><span class="zh">魅</span>Влияние</span><span class="val">заглушка</span></div>
-            <div class="stat-bar"><div class="stat-fill" data-w="80"></div></div>
-          </div>
-          <div class="stat">
-            <div class="stat-head"><span class="n"><span class="zh">制</span>Самоконтроль</span><span class="val">заглушка</span></div>
-            <div class="stat-bar"><div class="stat-fill" data-w="65"></div></div>
-          </div>
+        <div class="fold-body"><div class="fold-body-inner"><p>заглушка27</p></div></div>
+      </div>
+      <div class="fold">
+        <div class="fold-head">
+          <div class="idx zh">德</div>
+          <div class="name">Достоинства</div>
+          <div class="ind">＋</div>
         </div>
+        <div class="fold-body"><div class="fold-body-inner"><p>заглушка28</p></div></div>
       </div>
-    </div>
-
-    <div class="grid-2 reveal">
-      <div class="gift-card" data-zh="賜">
-        <div class="gift-icon">賜</div>
-        <div class="gift-name">заглушка33</div>
-        <div class="gift-desc">заглушка34 — описание дара.</div>
+      <div class="fold">
+        <div class="fold-head">
+          <div class="idx zh">罪</div>
+          <div class="name">Пороки</div>
+          <div class="ind">＋</div>
+        </div>
+        <div class="fold-body"><div class="fold-body-inner"><p>заглушка29</p></div></div>
       </div>
-      <div class="gift-card" data-zh="秘">
-        <div class="gift-icon">秘</div>
-        <div class="gift-name">заглушка35</div>
-        <div class="gift-desc">заглушка36 — описание дара.</div>
+      <div class="fold">
+        <div class="fold-head">
+          <div class="idx zh">懼</div>
+          <div class="name">Страхи</div>
+          <div class="ind">＋</div>
+        </div>
+        <div class="fold-body"><div class="fold-body-inner"><p>заглушка30</p></div></div>
       </div>
-      <div class="gift-card" data-zh="影">
-        <div class="gift-icon">影</div>
-        <div class="gift-name">заглушка37</div>
-        <div class="gift-desc">заглушка38 — описание дара.</div>
+      <div class="fold">
+        <div class="fold-head">
+          <div class="idx zh">願</div>
+          <div class="name">Устремления</div>
+          <div class="ind">＋</div>
+        </div>
+        <div class="fold-body"><div class="fold-body-inner"><p>заглушка31</p></div></div>
       </div>
-      <div class="gift-card" data-zh="弱">
-        <div class="gift-icon">弱</div>
-        <div class="gift-name">заглушка39</div>
-        <div class="gift-desc">заглушка40 — слабости.</div>
+      <div class="fold">
+        <div class="fold-head">
+          <div class="idx zh">習</div>
+          <div class="name">Обыкновения</div>
+          <div class="ind">＋</div>
+        </div>
+        <div class="fold-body"><div class="fold-body-inner"><p>заглушка32</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ СВЯЗИ ═══════════ -->
-  <section class="panel" id="tab-bonds">
-    <div class="section-title">
-      <span class="zh-big">緣分</span>
-      <span class="ru">Узы и связи</span>
+  <!-- ═══════════ IV. СИЛЫ ═══════════ -->
+  <section class="chapter" id="ch-4">
+    <div class="chapter-head">
+      <div class="ordinal">Глава четвёртая</div>
+      <div class="zh-t zh">力量</div>
+      <div class="ru-t">Силы и пределы</div>
+      <div class="under"></div>
     </div>
 
-    <div class="reveal">
-      <div class="bond">
-        <div class="bond-avatar">祖</div>
+    <div class="slab rise">
+      <span class="tick tl"></span><span class="tick tr"></span>
+      <span class="tick bl"></span><span class="tick br"></span>
+      <div class="slab-label">Мера · 量表</div>
+
+      <div class="columns-2">
         <div>
-          <div class="bond-name">заглушка41</div>
-          <div class="bond-role">Создатель</div>
-          <div class="bond-desc">заглушка42</div>
+          <div class="gauge" data-val="9">
+            <div class="gauge-top"><span class="n"><span class="zh">力</span>Сила</span><span class="roman">IX</span></div>
+            <div class="gauge-track"></div>
+          </div>
+          <div class="gauge" data-val="7">
+            <div class="gauge-top"><span class="n"><span class="zh">速</span>Скорость</span><span class="roman">VII</span></div>
+            <div class="gauge-track"></div>
+          </div>
+          <div class="gauge" data-val="9">
+            <div class="gauge-top"><span class="n"><span class="zh">韌</span>Стойкость</span><span class="roman">IX</span></div>
+            <div class="gauge-track"></div>
+          </div>
         </div>
-      </div>
-      <div class="bond">
-        <div class="bond-avatar">友</div>
         <div>
-          <div class="bond-name">заглушка43</div>
-          <div class="bond-role">Союзник</div>
-          <div class="bond-desc">заглушка44</div>
-        </div>
-      </div>
-      <div class="bond">
-        <div class="bond-avatar">敵</div>
-        <div>
-          <div class="bond-name">заглушка45</div>
-          <div class="bond-role">Враг</div>
-          <div class="bond-desc">заглушка46</div>
-        </div>
-      </div>
-      <div class="bond">
-        <div class="bond-avatar">情</div>
-        <div>
-          <div class="bond-name">заглушка47</div>
-          <div class="bond-role">Особая связь</div>
-          <div class="bond-desc">заглушка48</div>
+          <div class="gauge" data-val="10">
+            <div class="gauge-top"><span class="n"><span class="zh">智</span>Разум</span><span class="roman">X</span></div>
+            <div class="gauge-track"></div>
+          </div>
+          <div class="gauge" data-val="8">
+            <div class="gauge-top"><span class="n"><span class="zh">魅</span>Влияние</span><span class="roman">VIII</span></div>
+            <div class="gauge-track"></div>
+          </div>
+          <div class="gauge" data-val="6">
+            <div class="gauge-top"><span class="n"><span class="zh">制</span>Самообладание</span><span class="roman">VI</span></div>
+            <div class="gauge-track"></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="quote reveal">
-      заглушка49 — слова о тех, кто остался в памяти за три века.
-      <span class="author zh">— 舊夢 · заглушка50</span>
+    <div class="edicts rise">
+      <div class="edict">
+        <div class="glyph-col zh">天賦其一</div>
+        <div class="no">Дар первый</div>
+        <h3>заглушка33</h3>
+        <p>заглушка34 — существо дара, его цена и границы.</p>
+      </div>
+      <div class="edict">
+        <div class="glyph-col zh">天賦其二</div>
+        <div class="no">Дар второй</div>
+        <h3>заглушка35</h3>
+        <p>заглушка36 — существо дара, его цена и границы.</p>
+      </div>
+      <div class="edict">
+        <div class="glyph-col zh">天賦其三</div>
+        <div class="no">Дар третий</div>
+        <h3>заглушка37</h3>
+        <p>заглушка38 — существо дара, его цена и границы.</p>
+      </div>
+      <div class="edict">
+        <div class="glyph-col zh">弱點所在</div>
+        <div class="no">Уязвимости</div>
+        <h3>заглушка39</h3>
+        <p>заглушка40 — то, что смиряет даже бессмертных.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ V. УЗЫ ═══════════ -->
+  <section class="chapter" id="ch-5">
+    <div class="chapter-head">
+      <div class="ordinal">Глава пятая</div>
+      <div class="zh-t zh">緣分</div>
+      <div class="ru-t">Узы</div>
+      <div class="under"></div>
+    </div>
+
+    <div class="rise">
+      <div class="kin">
+        <div class="kin-sigil"><span class="g zh">祖</span><span class="r">Sire</span></div>
+        <div class="kin-body">
+          <div class="who">заглушка41</div>
+          <div class="status">Создатель</div>
+          <div class="note">заглушка42</div>
+        </div>
+      </div>
+      <div class="kin">
+        <div class="kin-sigil"><span class="g zh">友</span><span class="r">Socius</span></div>
+        <div class="kin-body">
+          <div class="who">заглушка43</div>
+          <div class="status">Союзник</div>
+          <div class="note">заглушка44</div>
+        </div>
+      </div>
+      <div class="kin">
+        <div class="kin-sigil"><span class="g zh">敵</span><span class="r">Hostis</span></div>
+        <div class="kin-body">
+          <div class="who">заглушка45</div>
+          <div class="status">Враг</div>
+          <div class="note">заглушка46</div>
+        </div>
+      </div>
+      <div class="kin">
+        <div class="kin-sigil"><span class="g zh">情</span><span class="r">Vinculum</span></div>
+        <div class="kin-body">
+          <div class="who">заглушка47</div>
+          <div class="status">Особая связь</div>
+          <div class="note">заглушка48</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="utterance rise">
+      <div class="words">заглушка49 — слова о тех, кто остался в памяти за три века.</div>
+      <div class="attrib">заглушка50</div>
     </div>
   </section>
 
 </div>
 
-<!-- ПОДВАЛ -->
+<!-- ═══ ЗАВЕРШЕНИЕ ═══ -->
 <footer>
-  <div class="zh-footer">永夜不朽</div>
-  <div class="small">1547 — 1852 · Вечная ночь нетленна</div>
+  <div class="meander" style="margin-bottom:60px"></div>
+  <div class="end-seal zh">終</div>
+  <div class="colophon-zh zh">永夜不朽</div>
+  <div class="colophon-ru">MDXLVII — MDCCCLII</div>
 </footer>
 
 <script>
-/* ============================================================
-   ЗАГРУЗЧИК
-============================================================ */
+/* ── Вход ─────────────────────────────────────────────── */
 window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+  setTimeout(() => document.getElementById('veil').classList.add('lifted'), 2600);
 });
 
-/* ============================================================
-   СЧЁТЧИК ВОЗРАСТА (0 → 305)
-============================================================ */
+/* ── Возраст: 0 → 305, медленно и весомо ─────────────── */
 (function(){
-  const el = document.getElementById('ageCounter');
-  const target = 305, dur = 2600;
-  let started = false;
-  function run(){
-    if(started) return; started = true;
+  const el = document.getElementById('ageNum');
+  const target = 305, dur = 3400;
+  setTimeout(() => {
     const t0 = performance.now();
     (function step(t){
-      const p = Math.min((t - t0)/dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(eased * target);
+      const p = Math.min((t - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(e * target);
       if(p < 1) requestAnimationFrame(step);
     })(t0);
-  }
-  setTimeout(run, 2200);
+  }, 3000);
 })();
 
-/* ============================================================
-   ВКЛАДКИ
-============================================================ */
-const tabBtns = document.querySelectorAll('.tab-btn');
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('section.panel').forEach(s => s.classList.remove('active'));
-    document.getElementById(btn.dataset.tab).classList.add('active');
-    observeAll();          // переподключаем reveal
-    if(btn.dataset.tab === 'tab-powers') setTimeout(fillStats, 200);
+/* ── Главы ───────────────────────────────────────────── */
+const links = document.querySelectorAll('.toc-link');
+links.forEach(l => {
+  l.addEventListener('click', () => {
+    links.forEach(x => x.classList.remove('active'));
+    l.classList.add('active');
+    document.querySelectorAll('.chapter').forEach(c => c.classList.remove('shown'));
+    document.getElementById(l.dataset.ch).classList.add('shown');
+    watch();
+    if(l.dataset.ch === 'ch-4') setTimeout(lightGauges, 350);
+    document.querySelector('nav.contents').scrollIntoView({behavior:'smooth'});
   });
 });
 
-/* ============================================================
-   АККОРДЕОН
-============================================================ */
-document.querySelectorAll('.acc-head').forEach(head => {
-  head.addEventListener('click', () => {
-    const item = head.parentElement;
-    const body = item.querySelector('.acc-body');
-    const open = item.classList.contains('open');
-    document.querySelectorAll('.acc-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.acc-body').style.maxHeight = null;
+/* ── Складни ─────────────────────────────────────────── */
+document.querySelectorAll('.fold-head').forEach(h => {
+  h.addEventListener('click', () => {
+    const fold = h.parentElement;
+    const body = fold.querySelector('.fold-body');
+    const wasOpen = fold.classList.contains('open');
+    document.querySelectorAll('.fold').forEach(f => {
+      f.classList.remove('open');
+      f.querySelector('.fold-body').style.maxHeight = null;
     });
-    if(!open){
-      item.classList.add('open');
+    if(!wasOpen){
+      fold.classList.add('open');
       body.style.maxHeight = body.scrollHeight + 'px';
     }
   });
 });
 
-/* ============================================================
-   ШКАЛЫ СПОСОБНОСТЕЙ
-============================================================ */
-function fillStats(){
-  document.querySelectorAll('.stat-fill').forEach(f => {
-    f.style.width = f.dataset.w + '%';
+/* ── Шкалы: сегменты зажигаются по одному ────────────── */
+function lightGauges(){
+  document.querySelectorAll('.gauge').forEach(g => {
+    const track = g.querySelector('.gauge-track');
+    if(track.children.length) {
+      relight(g, track);
+      return;
+    }
+    for(let i = 0; i < 10; i++){
+      const s = document.createElement('div');
+      s.className = 'gauge-seg';
+      track.appendChild(s);
+    }
+    relight(g, track);
+  });
+}
+function relight(g, track){
+  const val = +g.dataset.val;
+  [...track.children].forEach((seg, i) => {
+    seg.classList.remove('lit');
+    if(i < val) setTimeout(() => seg.classList.add('lit'), 120 * i + 200);
   });
 }
 
-/* ============================================================
-   REVEAL ПРИ СКРОЛЛЕ
-============================================================ */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+/* ── Появление при скролле ───────────────────────────── */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
     if(e.isIntersecting){
-      e.target.classList.add('revealed');
+      e.target.classList.add('seen');
       io.unobserve(e.target);
     }
   });
-}, {threshold:.12});
+}, {threshold:.15});
 
-function observeAll(){
-  document.querySelectorAll('.reveal:not(.revealed), .t-item:not(.revealed)')
+function watch(){
+  document.querySelectorAll('.rise:not(.seen), .epoch-row:not(.seen)')
     .forEach(el => io.observe(el));
 }
-observeAll();
+watch();
 
-/* ============================================================
-   ПАРЯЩИЕ УГОЛЬКИ / ЗОЛОТАЯ ПЫЛЬ
-============================================================ */
+/* ── Пыль: редкая, медленная, едва различимая ────────── */
 (function(){
-  const cv = document.getElementById('emberCanvas');
+  const cv = document.getElementById('dust');
   const cx = cv.getContext('2d');
-  let W, H, parts = [];
-
-  function resize(){
-    W = cv.width  = innerWidth;
-    H = cv.height = innerHeight;
-  }
+  let W, H;
+  const resize = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; };
   resize();
   addEventListener('resize', resize);
 
-  const COUNT = Math.min(70, Math.floor(innerWidth / 18));
-  for(let i = 0; i < COUNT; i++){
-    parts.push({
-      x: Math.random()*W,
-      y: Math.random()*H,
-      r: Math.random()*2.2 + .5,
-      vy: -(Math.random()*.4 + .1),
-      vx: (Math.random()-.5)*.25,
-      a: Math.random()*.6 + .15,
-      ph: Math.random()*Math.PI*2,
-      sp: Math.random()*.015 + .005
-    });
-  }
+  const N = Math.min(26, Math.floor(innerWidth / 55));
+  const ps = Array.from({length: N}, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    r: Math.random() * 1.3 + .3,
+    vy: -(Math.random() * .12 + .03),
+    vx: (Math.random() - .5) * .06,
+    a: Math.random() * .3 + .06,
+    ph: Math.random() * Math.PI * 2
+  }));
 
   (function loop(){
-    cx.clearRect(0,0,W,H);
-    for(const p of parts){
-      p.ph += p.sp;
-      p.x += p.vx + Math.sin(p.ph)*.2;
+    cx.clearRect(0, 0, W, H);
+    for(const p of ps){
+      p.ph += .004;
+      p.x += p.vx;
       p.y += p.vy;
-      if(p.y < -10){ p.y = H + 10; p.x = Math.random()*W; }
-      if(p.x < -10) p.x = W + 10;
-      if(p.x > W + 10) p.x = -10;
-      const tw = p.a * (0.6 + 0.4*Math.sin(p.ph*2));
+      if(p.y < -6){ p.y = H + 6; p.x = Math.random() * W; }
+      const a = p.a * (.6 + .4 * Math.sin(p.ph));
       cx.beginPath();
-      cx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      cx.fillStyle = `rgba(232,200,96,${tw})`;
-      cx.shadowColor = 'rgba(201,162,39,.8)';
-      cx.shadowBlur = 8;
+      cx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      cx.fillStyle = `rgba(207,174,98,${a})`;
       cx.fill();
-      cx.shadowBlur = 0;
     }
     requestAnimationFrame(loop);
   })();
 })();
-
-/* ============================================================
-   ЛЁГКИЙ ПАРАЛЛАКС ФОНОВОГО ИЕРОГЛИФА
-============================================================ */
-addEventListener('mousemove', e => {
-  const d = document.querySelector('.bg-dragon');
-  const x = (e.clientX / innerWidth  - .5) * 22;
-  const y = (e.clientY / innerHeight - .5) * 22;
-  d.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-});
 </script>
 </body>
 </html>
